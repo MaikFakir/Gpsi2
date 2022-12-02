@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider3"></div>
+
+
+    <div class="b-example-divider"></div>
+
+    <div class="bg-dark text-secondary px- py-5 text-center">
+        <div class="container">
+            <div class="py-5">
+                <div style=" margin-left: 25%; margin-right: 25%;">
+                    <form class="form-signin" th:action="@{/login}" method="post">
+                        <h1 class="display-5 fw-bold text-white">Iniciar Sesión</h1>
+                        <hr>
+                        <div th:if="${error != null}">
+                            <p class="text-danger">[[${error}]]</p>
+                        </div>
+                        <div th:if="${message != null}">
+                            <p class="text-light">[[${message}]]</p>
+                        </div>
+                        <hr>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com" required>
+                            <label for="username">Correo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+                            <label for="password">Contraseña</label>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <input type="checkbox" class="form-check-input" id="checkRememberMe" name="checkRememberMe">
+                            <label class="form-check-label" for="checkRememberMe">Recordarme</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Iniciar Sesión</button>
+                        <div style="margin-top: 1rem;">
+                            <a th:href="@{/forgot_password} ">Olvidaste tu contraseña?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="b-example-divider2"></div>
+
+
+    <footer th:replace="plantilla/template :: footer"></footer>
+
+</body>
+
+</html>

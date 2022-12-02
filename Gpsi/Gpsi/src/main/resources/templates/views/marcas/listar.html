@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+        <br>
+        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
+            <a th:href="@{/views/marcas/nueva}"><button type="button" class="btn btn-warning">Nueva marca</button></a>
+        </div>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div style="margin-bottom: 1rem;">
+            <table id="tablaMarca" class="table table-striped dt-responsive nowrap" style="width:100%">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Marca</th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="marca: ${listMarcas}">
+                        <tr>
+                            <td class="text-center">[[${marca.id}]]</td>
+                            <td class="text-center">[[${marca.name}]]</td>
+
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/marcas/edit/'+ ${marca.id}}">Edit</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/marcas/delete/'+ ${marca.id}}">Delete</a></td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function() {
+            var table = $('#tablaMarca').DataTable({
+                colReorder: true,
+                deferRender: true,
+                lengthChange: false,
+                buttons: {
+                    buttons: [{
+
+                            extend: 'excel',
+                            exportOptions: {
+                                columns: [0, 1]
+                            },
+                            className: 'btn-primary',
+
+                            split: [, {
+                                extend: 'print',
+                                exportOptions: {
+                                    columns: [0, 1]
+                                },
+                                title: 'Marca',
+                            }],
+                            className: 'btn-primary',
+
+                        },
+                        'pageLength'
+                    ],
+                    dom: {
+                        button: {
+                            className: 'btn',
+                        }
+                    }
+
+
+                },
+                language: {
+                    buttons: {
+                        pageLength: {
+                            _: "Mostrar %d elementos",
+                            '-1': "Mostrar todos"
+                        }
+                    }
+                },
+                "oLanguage": {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+
+
+                }
+            });
+
+            table.buttons().container()
+                .appendTo('#tablaMarca_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>

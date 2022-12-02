@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+</head>
+
+<body onload="startTime()">
+
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider3"></div>
+
+    <div class="px-4 pt-5 my-5 text-center ">
+        <h1 class="display-4 fw-bold">Griip Logistica</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Nuestra misión es ofrecer una logística profesional y eficiente.¿Como lo logramos? Lo hacemos por medio de nuestra plataforma tecnológica donde optimizamos las rutas de entrega para que se realicen los servicios en el menor tiempo posible.
+                Adicionalmente contamos con una flota de vehículos propios (Trailers,Vans,Camiones) capacitados para transportar carga de hasta 1.500kg, lo que nos permiten distribuir un mayor numero de envios en una misma ruta.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+                <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">¿Donde nos Ubicamos?</button>
+                <a href="Contacto/Contacto.html"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Contactados</button></a>
+            </div>
+        </div>
+        <div class="overflow-hidden" style="max-height: 36vh;">
+            <div class="container px-5">
+                <img th:src="@{/images/encabezado.png}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container py-3">
+
+        <main style="padding: 4rem; ">
+            <h1 class="display-4 fw-bold">Planes Corporativos</h1>
+            <div class="row row-cols-1 row-cols-md-4 mb-4 text-center" style="
+            margin-top: 3rem;
+        ">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Ruta</h4>
+                        </div>
+                        <div class="card-body">
+                            <!--<h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>-->
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>10 users included</li>
+                                <li>2 GB of storage</li>
+                                <li>Email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-outline-success">Conocer mas</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Hibrido</h4>
+                        </div>
+                        <div class="card-body">
+                            <!--<h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>-->
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>20 users included</li>
+                                <li>10 GB of storage</li>
+                                <li>Priority email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-success">Conocer mas</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Mercancia</h4>
+                        </div>
+                        <div class="card-body">
+                            <!--<h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>-->
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>30 users included</li>
+                                <li>15 GB of storage</li>
+                                <li>Phone and email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-success">Conocer mas</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-danger">
+                        <div class="card-header py-3 text-bg-danger border-danger">
+                            <h4 class="my-0 fw-normal">Contra Entrega</h4>
+                        </div>
+                        <div class="card-body">
+                            <!--<h1 class="card-title pricing-card-title">$0<small class="text-muted fw-light">/mo</small></h1>-->
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>30 users included</li>
+                                <li>15 GB of storage</li>
+                                <li>Phone and email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-danger">Conocer mas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="display-6 text-center mb-4">Comparar Planes</h2>
+
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: 22%;"></th>
+                            <th style="width: 22%;">Ruta</th>
+                            <th style="width: 22%;">Hibrido</th>
+                            <th style="width: 22%;">Mercancia</th>
+                            <th style="width: 22%;">Contra Entrega</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Public</th>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Private</th>
+                            <td></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+                    </tbody>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">Permissions</th>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Sharing</th>
+                            <td></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Unlimited members</th>
+                            <td></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">Extra security</th>
+                            <td></td>
+                            <td></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="b-example-divider"></div>
+
+
+    <footer th:replace="plantilla/template :: footer"></footer>
+
+</body>
+
+
+</html>

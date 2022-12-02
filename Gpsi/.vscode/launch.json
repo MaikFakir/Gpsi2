@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch java2",
+            "request": "launch",
+            "mainClass": "com.proyecto.Gpsi.java2",
+            "projectName": "Gpsi"
+        },
+        {
+            "type": "java",
+            "name": "Launch java",
+            "request": "launch",
+            "mainClass": "com.proyecto.Gpsi.java",
+            "projectName": "Gpsi"
+        },
+        {
+            "type": "java",
+            "name": "Launch HelloWorld",
+            "request": "launch",
+            "mainClass": "com.proyecto.Gpsi.HelloWorld",
+            "projectName": "Gpsi"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GpsiApplication<Gpsi>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.proyecto.Gpsi.GpsiApplication",
+            "projectName": "Gpsi",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=49758 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=Gpsi"
+        }
+    ]
+}

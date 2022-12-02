@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+</head>
+
+<body onload="startTime()">
+
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+
+    <div class=" container col-xl-10 col-xxl-8 px-4 py-5 ">
+        <div class=" row align-items-center g-lg-5 py-5 ">
+            <div class="col-lg-7 text-center text-lg-start ">
+                <h1 class="display-4 fw-bold lh-1 mb-3 ">[[${title}]]</h1>
+                <p class="col-lg-10 fs-4 ">[[${message}]]</p>
+                <a th:href="@{/} ">Click aquí para volver a la pagina de inicio.</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+
+    <footer th:replace="plantilla/template :: footer"></footer>
+
+</body>
+
+
+</html>

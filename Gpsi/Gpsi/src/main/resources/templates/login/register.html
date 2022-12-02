@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+
+    <div class=" container col-xl-10 col-xxl-8 px-4 py-5 ">
+        <div class=" row align-items-center g-lg-5 py-5 ">
+            <div class="col-lg-7 text-center text-lg-start ">
+                <h1 class="display-4 fw-bold lh-1 mb-3 ">Crear Cuenta</h1>
+                <p class="col-lg-10 fs-4 ">Create una cuenta,y aprovecha los planes y servicios que ofrecemos para ti.</p>
+            </div>
+            <div class="col-md-10 mx-auto col-lg-5 ">
+                <form class="p-4 p-md-5 border rounded-3 bg-dark " th:action="@{/process_register}" th:object="${usuario}" method="post">
+
+                    <div class="form-floating mb-3 ">
+                        <select class="form-select " th:field="*{tipoDocumento}">
+                            <option th:value="0" >Tipo Documento</option>
+                            <option th:value="1" th:text="Cedula">Cedula</option>
+                            <option th:value="2" th:text="Pasaporte">Pasaporte</option>
+                          </select>
+                    </div>
+
+
+                    <div class="form-floating mb-3 ">
+                        <input type="number " class="form-control " th:field="*{id}" name="id" placeholder="1231001212 " required>
+                        <label for="id ">Numero de Documento</label>
+                    </div>
+                    <div class="form-floating mb-3 ">
+                        <input type="text " class="form-control " th:field="*{nombres}" name="nombres" placeholder="nombre " required>
+                        <label for="nombres">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3 ">
+                        <input type="text " class="form-control " th:field="*{apellidos}" name="apellidos" placeholder="nombre" required>
+                        <label for="apellidos">Apellido</label>
+                    </div>
+                    <div class="form-floating mb-3 ">
+                        <input type="number " class="form-control " th:field="*{telefono}" name="telefono" placeholder="3123123123 " required>
+                        <label for="telefono">Telefono</label>
+                    </div>
+                    <div class="form-floating mb-3 ">
+                        <input type="email " class="form-control " th:field="*{email}" name="email" placeholder="name@example.com " required>
+                        <label for="email ">Correo</label>
+                    </div>
+                    <div class="form-floating mb-3 ">
+                        <input type="password" class="form-control " th:field="*{contraseña}" name="contraseña" placeholder="Contraseña" autocomplete="off " required>
+                        <label for="contraseña">Contraseña</label>
+                    </div>
+
+                    <button class="w-100 btn btn-lg btn-primary " type="submit ">Registrarse</button>
+                    <hr class="my-2 ">
+                    <small class="text-muted ">Al presionar Enviar, estas aceptando los términos y condiciones.</small>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>

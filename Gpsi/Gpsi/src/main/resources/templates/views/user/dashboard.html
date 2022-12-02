@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <br>
+        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
+            <a th:href="@{/views/tpProd/nuevo}"><button type="button" class="btn btn-warning">Nuevo Tipo Producto</button></a>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>
