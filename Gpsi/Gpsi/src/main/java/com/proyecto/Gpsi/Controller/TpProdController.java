@@ -1,4 +1,4 @@
-package com.proyecto.Gpsi.Controller;
+ package com.proyecto.Gpsi.Controller;
 
 import java.util.List;
 

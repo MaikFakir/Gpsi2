@@ -27,37 +27,40 @@
         </script>
         <br>
         <div class="col-md-2 text-center" style="margin-bottom: 2em;">
-            <a th:href="@{/views/bitacora_operaciones}"><button type="button" class="btn btn-warning">Nueva Bitacora</button></a>
+            <a th:href="@{/views/bitacora_operaciones/nueva}"><button type="button" class="btn btn-warning">Nueva Bitacora</button></a>
         </div>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
-            <table id="tablaMarca" class="table table-striped dt-responsive nowrap" style="width:100%">
+            <table id="tablaOperaciones" class="table table-striped dt-responsive nowrap" style="width:100%">
 
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">ID</th>
+                        <th class="text-center">Gestion Envio</th>
                         <th class="text-center">Numero Guia</th>
-                        <th class="text-center">Valor Seguro</th>
                         <th class="text-center">Orden</th>
                         <th class="text-center">Valor Seguro Producto</th>
                         <th class="text-center">Distancia</th>
                         <th class="text-center">Estado</th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block th:each="listBO: ${listbitacoraOperaciones}">
+                    <th:block th:each="bitacoraOperaciones: ${listbitacoraOperaciones}">
                         <tr>
-                            <td class="text-center">[[${listBO.id}]]</td>
-                            <td class="text-center">[[${listBO.numGuia}]]</td>
-                            <td class="text-center">[[${listBO.Orden}]]</td>
-                            <td class="text-center">[[${listBO.valorSeguroProducto}]]</td>
-                            <td class="text-center">[[${listBO.distancia}]]</td>
-                            <td class="text-center">[[${listBO.estado}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.id}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.gestionEnvios.id}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.numGuia}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.Orden}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.valorSeguroProducto}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.distancia}]]</td>
+                            <td class="text-center">[[${bitacoraOperaciones.estado}]]</td>
 
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/marcas/edit/'+ ${marca.id}}">Edit</a></td>
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/marcas/delete/'+ ${marca.id}}">Delete</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/edit/'+ ${bitacoraOperaciones.id}}">Edit</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/delete/'+ ${bitacoraOperaciones.id}}">Delete</a></td>
                         </tr>
                     </th:block>
                 </tbody>
@@ -70,7 +73,7 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#tablaMarca').DataTable({
+            var table = $('#tablaOperaciones').DataTable({
                 colReorder: true,
                 deferRender: true,
                 lengthChange: false,
@@ -140,7 +143,7 @@
             });
 
             table.buttons().container()
-                .appendTo('#tablaMarca_wrapper .col-md-6:eq(0)');
+                .appendTo('#tablaOperaciones_wrapper .col-md-6:eq(0)');
         });
     </script>
 

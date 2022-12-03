@@ -43,6 +43,15 @@ public class GestionEnvios implements Serializable {
     @Column(nullable = false, length = 50)
     private String estado;
 
+    @Column(nullable = false, length = 50)
+    private String tipoEnvio;
+
+    @Column(nullable = false, length = 50)
+    private String tipoVehiculo;
+
+    @Column(nullable = false, length = 50)
+    private String tamPaquete;
+
     
     @Column(name = "fecha_creacion" ,updatable = false, nullable = false)
     private String fechacreacion;
@@ -125,6 +134,30 @@ public class GestionEnvios implements Serializable {
 
     public void setTipoProd(TipoProd tipoProd) {
         this.tipoProd = tipoProd;
+    }
+
+    public String getTipoEnvio() {
+        return tipoEnvio;
+    }
+
+    public void setTipoEnvio(String tipoEnvio) {
+        this.tipoEnvio = tipoEnvio;
+    }
+
+    public String getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public void setTipoVehiculo(String tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
+    }
+
+    public String getTamPaquete() {
+        return tamPaquete;
+    }
+
+    public void setTamPaquete(String tamPaquete) {
+        this.tamPaquete = tamPaquete;
     }
 
     
