@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+        <br>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div style="margin-bottom: 1rem;">
+
+            <div class="row g-3">
+                <div class="col-md-4 mb-3">
+
+                    <div class="card">
+                        <div class="card-header">Perfil</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Bienvenido <span sec:authentication="principal.authorities"></span></h5>
+                            <p class="card-text">[[${#request.userPrincipal.principal.fullName}]]</p>
+                            <a th:href="@{/views/dashboard/cuenta}" class="btn btn-primary">Ver Cuenta</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card">
+                        <div class="card-header">Pedidos del dia
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+
+                    <div class="card">
+                        <div class="card-header">Tablas</div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Usuarios</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
+                                <li class="list-group-item"><a th:href="@{/views/enrutador/listar}">Ruta</a></li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+
+    <div class="container" style=" padding: 10%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <br>
+        <form th:action="@{/views/enrutador/save}" method="post" th:object="${ruta}">
+            <div class="border rounded" style="padding: 3%;">
+                <div class="mb-3">
+                    <label for="id" th:if="${id != null}" class="form-label">Id:</label>
+                    <input type="number" th:if="${id != null}" class="form-control" th:field="*{id}" placeholder="Marca de la empresa" id="id" name="id" required maxlength="45" readonly>
+                </div>
+                <div class="row g-3">
+
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">Gestion envio: </label>
+                        <input type="text" class="form-control" th:field="*{gestionenvios}">
+                    </div>
+
+                    <div class=" col-md-6 mb-3 ">
+                        <label for="lastName " class="form-label ">Peso:</label>
+                        <input type="text" class="form-control " th:field="*{peso} ">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">Fecha Ruta: </label>
+                        <input type="date" class="form-control" th:field="*{fechaRuta}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Direccion</label>
+                        <input type="text" class="form-control" th:field="*{direccion}">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Complemento direccion</label>
+                        <input type="text" class="form-control" th:field="*{complementoDireccion}">
+
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="lastName" class="form-label">Instrucciones:</label>
+                        <textarea class="form-control" th:field="*{instrucciones}" minlength="4" maxlength="500" pattern="{4,8}"></textarea>
+                    </div>
+
+
+
+
+                </div>
+                <div class="text-center ">
+                    <button type="submit " class="btn btn-primary ">Guardar</button>
+                    <button type="submit " class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="b-example-divider2 "></div>
+
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+    <script type="text/javascript ">
+        function cancelForm() {
+            window.location = "[[@{/views/bitacora_operaciones/listar}]] ";
+        }
+    </script>
+
+</body>
+
+</html>

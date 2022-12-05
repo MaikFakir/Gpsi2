@@ -48,14 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/users/**").authenticated()
+			.antMatchers("/dashboard/**").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
     		.failureUrl("/login_error")
 			.loginPage("/login").permitAll()
 				.usernameParameter("username")
-				.defaultSuccessUrl("/users")
+				.defaultSuccessUrl("/views/dashboard/inicio")
 				.passwordParameter("password")
 				.and()
 				.rememberMe().key("uniqueAndSecret").rememberMeParameter("checkRememberMe").tokenValiditySeconds(3600000)

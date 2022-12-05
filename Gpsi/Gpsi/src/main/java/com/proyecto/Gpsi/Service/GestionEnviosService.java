@@ -56,5 +56,16 @@ public class GestionEnviosService {
         }
 
     } */
+
+    public Optional<GestionEnvios> findById(Integer id) throws Exception {
+
+        try {
+            Optional<GestionEnvios> entities = this.repo.findById(id);
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+        
     
 }

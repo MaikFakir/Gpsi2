@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+
+    <div class="container" style=" padding: 10%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <br>
+        <form th:action="@{/views/dashboard/save}" method="post" th:object="${usu}">
+            <div class="border rounded" style="padding: 3%;">
+
+                <div class="row g-3">
+
+                    <div class="mb-3">
+                        <label for="id" th:if="${id != null}" class="form-label">Id:</label>
+                        <input type="number" th:if="${id != null}" class="form-control" th:field="*{id}" placeholder="Marca de la empresa" id="id" name="id" required maxlength="45" readonly>
+                    </div>
+
+                    <div class="form-floating mb-3 ">
+                        <select class="form-select " th:field="*{tipoDocumento}">
+                            <option th:value="0" >Tipo Documento</option>
+                            <option th:value="1" th:text="Cedula">Cedula</option>
+                            <option th:value="2" th:text="Pasaporte">Pasaporte</option>
+                          </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Nombres:</label>
+                        <input type="text" class="form-control" th:field="*{nombres}" id="nombres" name="nombres" required maxlength="45">
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Apellidos:</label>
+                        <input type="text" class="form-control" th:field="*{apellidos}" id="apellidos" name="apellidos" required maxlength="45">
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Telefono:</label>
+                        <input type="text" class="form-control" th:field="*{telefono}" id="telefono" name="telefono" required maxlength="45">
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Email:</label>
+                        <input type="text" class="form-control" th:field="*{email}" id="email" name="email" required maxlength="45">
+                    </div>
+                    <div class="mb-3" hidden>
+                        <label for="marca" class="form-label">Contraseña:</label>
+                        <input type="text" class="form-control" th:field="*{contraseña}" id="contraseña" name="contraseña" maxlength="45">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <th:block th:each="role: ${listRoles}">
+                            <input type="checkbox" th:field="*{roles}" th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                        </th:block>
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <select class="form-select" aria-label="Default select example" th:field="*{marca}">
+                            <option th:each="marca: ${listMarcas}"
+                              th:value="${marca.id}" 
+                              th:text="${marca.name}"
+                              />
+                          </select>
+
+
+                    </div>
+
+                    <div class="mb-3" hidden>
+                        <label for="marca" class="form-label">Estado:</label>
+                        <input type="text" class="form-control" th:field="*{estado}" id="contraseña" name="contraseña" maxlength="45">
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="text-center ">
+                    <button type="submit " class="btn btn-primary ">Guardar</button>
+                    <button type="submit " class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="b-example-divider2 "></div>
+
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+    <script type="text/javascript ">
+        function cancelForm() {
+            window.location = "[[@{/views/dashboard/inicio}]] ";
+        }
+    </script>
+
+</body>
+
+</html>

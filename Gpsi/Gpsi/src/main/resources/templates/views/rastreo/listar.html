@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
+            [[${alerta}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+        <br>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div style="margin-bottom: 1rem;">
+
+            <form class="p-4 p-md-5 border rounded-3 bg-light" th:action="@{/views/rastreo/busqueda}" method="get">
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Numero id</label>
+                    <input type="number " class="form-control " placeholder="ID de PEDIDO " aria-label="Recipient 's username " aria-describedby="basic-addon2 " name="id">
+                </div>
+
+                <hr class="my-4">
+                <small class="text-muted"> Al presionar Enviar, estas aceptando los términos y condiciones.</small>
+                <button class="w-100 btn btn-lg btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#contenido-modal">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>

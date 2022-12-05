@@ -2,6 +2,7 @@ package com.proyecto.Gpsi.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -9,6 +10,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,9 @@ import com.proyecto.Gpsi.Entity.Usuario;
 import com.proyecto.Gpsi.Repository.MarcaRepository;
 import com.proyecto.Gpsi.Repository.RolRepository;
 import com.proyecto.Gpsi.Repository.UsuarioRepository;
+import com.proyecto.Gpsi.Repository.UsuarioRepository2;
 import com.proyecto.Gpsi.Util.UsuarioNotFoundException;
+import com.proyecto.Gpsi.Util.UsuarioNotFoundException2;
 
 import net.bytebuddy.utility.RandomString;
 
@@ -28,6 +32,9 @@ public class UsuarioServices {
     
     @Autowired
     private UsuarioRepository repo;
+
+	@Autowired
+    private UsuarioRepository2 repo2;
 
     @Autowired
     private RolRepository roleRepo;
@@ -42,9 +49,14 @@ public class UsuarioServices {
     @Autowired
     private JavaMailSender mailSender;
 
-    public List<Usuario> listAll() {
-		return repo.findAll();
+    
+
+	private void encodePassword(Usuario usuario) {
+		String encodedPassword = passwordEncoder.encode(usuario.getContraseña());
+		usuario.setContraseña(encodedPassword);		
 	}
+	
+	
 
     public void register(Usuario usuario, String siteURL) 
 			throws UnsupportedEncodingException, MessagingException {
@@ -139,5 +151,38 @@ public class UsuarioServices {
 
         repo.save(usuario);
     }
+
+	public List<Usuario> listAll() {
+        return (List<Usuario>) repo2.findAll();
+    }
+
+	public void save(Usuario usuario) {
+        repo2.save(usuario);
+    }
+
+    public Usuario get(Integer id) throws UsuarioNotFoundException2{
+		Optional<Usuario> result = repo2.findById(id);
+        if(result.isPresent()){
+            return result.get();
+        }
+        throw new UsuarioNotFoundException2("No se pudo encontrar un usuario con ID" + id);
+	}
+    
+    public void delete(Integer id) throws UsuarioNotFoundException2 {
+        Long count = repo2.countById(id);
+        if (count == null || count == 0) {
+            throw new UsuarioNotFoundException2("No se pudo encontrar algun usuario con el ID " + id);
+        }
+        repo.deleteById(id);
+    }
+
+	public List<Rol> listRoles() {
+		return roleRepo.findAll();
+	}
+
+
+
+
+
 
 }

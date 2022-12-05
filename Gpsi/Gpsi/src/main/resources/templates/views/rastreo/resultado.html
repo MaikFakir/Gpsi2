@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
+            [[${alerta}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div style="margin-bottom: 1rem;">
+
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">ID</h5>
+                    </div>
+                    <p class="mb-1"><input type="text" th:field="${pedido.numGuia}" class="form-control" readonly/></p>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Nombres</h5>
+                    </div>
+                    <p class="mb-1"><input type="text" th:field="${pedido.usuario.fullName}" class="form-control" readonly/></p>
+                    <small class="text-muted"></small>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Estado</h5>
+                    </div>
+                    <p class="mb-1"><input type="text" th:field="${pedido.estado}" class="form-control" readonly/></p>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Tipo Vehiculo</h5>
+                    </div>
+                    <p class="mb-1"><input type="text" th:field="${pedido.tipoVehiculo}" class="form-control" readonly/></p>
+                </a>
+                <a class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Fecha Creación</h5>
+                    </div>
+                    <p class="mb-1"><input type="text" th:field="${pedido.fechacreacion}" class="form-control" readonly/></p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>

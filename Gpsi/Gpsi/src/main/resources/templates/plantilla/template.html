@@ -107,7 +107,7 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a th:href="@{/}" class="nav-link px-2 text-secondary">Inicio</a></li>
-                    <li><a href="Rastreo/Rastreo.html" class="nav-link px-2 text-white">Rastrear Pedido</a></li>
+                    <li><a th:href="@{/views/rastreo/rastreo}" class="nav-link px-2 text-white">Rastrear Pedido</a></li>
                 </ul>
 
 
@@ -140,12 +140,8 @@
                             <li>
                                 <a class="dropdown-item"></a>
                             </li>
-                            <li><a class="dropdown-item " th:href="@{/users}">Usuarios</a></li>
-                            <li><a class="dropdown-item " th:href="@{/views/marcas/listar}">Marcas</a></li>
-                            <li><a class="dropdown-item " th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
-                            <li><a class="dropdown-item " th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
-                            <li><a class="dropdown-item " th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
-
+                            <li><a class="dropdown-item " th:href="@{/}">Inicio</a></li>
+                            <li><a class="dropdown-item " th:href="@{/views/dashboard/inicio}">Principal</a></li>
                         </div>
                         <li>
                             <hr class="dropdown-divider ">
@@ -158,6 +154,9 @@
                                 </button>
 
                             </form>
+
+
+
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="plantilla/template :: head">
+
+</head>
+
+<body onload="startTime()">
+    <div th:replace="plantilla/template :: cosas"></div>
+
+    <header th:replace="plantilla/template :: header"></header>
+
+    <div class="b-example-divider2"></div>
+
+    <div class="container" style=" padding-top: 5%;">
+        <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
+            [[${alerta}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div style="margin-bottom: 1rem;">
+
+            <div class="card text-center">
+                <div class="card-header">
+                    [[${#request.userPrincipal.principal.authorities}]]
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <div class="card-body" style="margin-left: 5rem;margin-right: 5rem;">
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item "><span><b>Nombre:&nbsp;</b></span>[[${#request.userPrincipal.principal.fullName}]]</li>
+                            <li class="list-group-item "><span><b>Email:&nbsp;</b>[[${#request.userPrincipal.principal.username}]]</li>
+                            <li class="list-group-item " th:if="${#request.userPrincipal.principal.TipoDocumento == '1'}"><span><b>Tipo documento:&nbsp;</b>Cedula</li>
+                            <li class="list-group-item "><span><b>Telefono:&nbsp;</b>[[${#request.userPrincipal.principal.telefono}]]</li>
+                            <li class="list-group-item "><span><b>Marca:&nbsp;</b>[[${#request.userPrincipal.principal.marca.name}]]</li>
+                        </ul>
+                    </div>
+                    <p class="card-text ">¿Desea actualizar sus datos?</p>
+                    <th:block th:each="user: ${user2}">
+                        <a class="btn btn-primary" th:value="${user.id}" th:href="@{'/views/dashboard/edit/'+ ${user.id}}">Edit</a>
+                    </th:block>
+                    <hr>
+                </div>
+                <div class="card-footer text-muted ">
+                    <hr>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="b-example-divider2 "></div>
+
+    <footer th:replace="plantilla/template :: footer "></footer>
+
+</body>
+
+</html>
