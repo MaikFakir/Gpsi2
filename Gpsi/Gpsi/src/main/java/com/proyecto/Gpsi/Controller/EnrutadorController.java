@@ -65,9 +65,10 @@ public class EnrutadorController {
 		List<GestionEnvios> listGestionEnvios = service2.listGestionEnvios();
 		try {
 			Enrutador enrutador = service.get(id);
-			model.addAttribute("enrutador", enrutador);
+			model.addAttribute("ruta", enrutador);
+			model.addAttribute("gestionenvios", listGestionEnvios);
 			model.addAttribute("title", "Editar Gestion Envios (ID: " + id + ")");
-			return "/views/gestion_envios/frmGestionEnviosED";
+			return "/views/enrutador/frmEnrutador";
 		} catch (EnrutadorNotFoundException e) {
 			ra.addFlashAttribute("message", "La ruta que busca no se encuentra!");
 			return "redirect:/views/enrutador/listar";

@@ -1,6 +1,7 @@
 package com.proyecto.Gpsi.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,10 @@ public interface GestionEnviosRepository2 extends JpaRepository<GestionEnvios,In
 
     @Query(value = "SELECT * FROM GestionEnvios WHERE GestionEnvios.id :id ",nativeQuery = true)
     List<GestionEnvios> findById(@Param("id")String id);
+
+
+    @Query(value = "SELECT estado, count(estad) FROM GestionEnvios group by estado",nativeQuery = true)
+    public List<Map<String,Object>> findByRecommendations();
 
 }
 

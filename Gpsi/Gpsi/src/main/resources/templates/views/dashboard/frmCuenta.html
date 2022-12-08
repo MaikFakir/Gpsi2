@@ -16,7 +16,7 @@
     <div class="container" style=" padding: 10%;">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
         <br>
-        <form th:action="@{/views/dashboard/save}" method="post" th:object="${usu}">
+        <form th:action="@{/views/dashboard/save2}" method="post" th:object="${usu}">
             <div class="border rounded" style="padding: 3%;">
 
                 <div class="row g-3">
@@ -50,9 +50,9 @@
                         <label for="marca" class="form-label">Email:</label>
                         <input type="text" class="form-control" th:field="*{email}" id="email" name="email" required maxlength="45">
                     </div>
-                    <div class="mb-3" hidden>
+                    <div class="mb-3">
                         <label for="marca" class="form-label">Contraseña:</label>
-                        <input type="text" class="form-control" th:field="*{contraseña}" id="contraseña" name="contraseña" maxlength="45">
+                        <input type="password" class="form-control" th:field="*{contraseña}" id="contraseña" name="contraseña" maxlength="45">
                     </div>
 
 
@@ -87,7 +87,7 @@
                 </div>
                 <div class="text-center ">
                     <button type="submit " class="btn btn-primary ">Guardar</button>
-                    <button type="submit " class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
+                    <button type="button" class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
                 </div>
             </div>
 

@@ -24,9 +24,21 @@
             }, 1000);
         </script>
         <br>
-        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div>
             <a th:href="@{/views/tpProd/nuevo}"><button type="button" class="btn btn-warning">Nuevo Tipo</button></a>
         </div>
+        <hr>
+        <form th:action="@{/views/tpProd/import}" method="post" enctype="multipart/form-data">
+            <label class="form-label">Cargar datos:</label>
+            <div class="input-group">
+                <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Cargar</button>
+            </div>
+            <hr>
+        </form>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
@@ -47,8 +59,8 @@
                             <td class="text-center">[[${tpProd.id}]]</td>
                             <td class="text-center">[[${tpProd.name}]]</td>
 
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/tpProd/edit/'+ ${tpProd.id}}">Edit</a></td>
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/tpProd/delete/'+ ${tpProd.id}}">Delete</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/tpProd/edit/'+ ${tpProd.id}}">Editar</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/tpProd/delete/'+ ${tpProd.id}}">Borrar</a></td>
                         </tr>
                     </th:block>
                 </tbody>
@@ -72,6 +84,8 @@
                             exportOptions: {
                                 columns: [0, 1]
                             },
+                            sheetName: 'tipo_prod',
+                            title: null,
                             className: 'btn-primary',
 
                             split: [, {

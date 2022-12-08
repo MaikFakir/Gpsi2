@@ -157,6 +157,11 @@ public class UsuarioServices {
     }
 
 	public void save(Usuario usuario) {
+		encodePassword(usuario);		
+        repo2.save(usuario);
+    }
+
+	public void save2(Usuario usuario) {
         repo2.save(usuario);
     }
 

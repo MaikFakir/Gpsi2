@@ -23,7 +23,7 @@ public class Usuario implements Serializable{
     
     @Id
     @Column( unique = true, length = 12)
-    private int id;
+    private Integer id;
 
     @Column(name = "tipoDocumento", length = 45)
     private String tipoDocumento;
@@ -63,7 +63,7 @@ public class Usuario implements Serializable{
 	)
 	private Set<Rol> roles = new HashSet<>();
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

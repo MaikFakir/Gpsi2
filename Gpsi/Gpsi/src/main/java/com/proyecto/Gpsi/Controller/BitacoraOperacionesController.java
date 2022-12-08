@@ -88,4 +88,6 @@ public class BitacoraOperacionesController {
 		return "redirect:/views/bitacora_operaciones/listar";
 	}
 
+	
+
 }   

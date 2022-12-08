@@ -26,7 +26,7 @@ public class MarcaController {
     private MarcaService service;
 
 	@GetMapping("/listar")
-	public String listUsers(Model model) {
+	public String listMarca(Model model) {
 
         List<Marca> listMarcas = service.listMarcas();
 		model.addAttribute("listMarcas", listMarcas);

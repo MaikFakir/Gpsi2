@@ -34,11 +34,18 @@
                         <label for="lastName" class="form-label">Direccion destino:</label>
                         <input type="text" class="form-control" th:field="*{destino}" id="destino" name="destino" required>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3" sec:authorize="hasAuthority('Admin','Empresa')">
                         <label for="lastName" class="form-label">Cantidad:</label>
                         <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad">
 
                     </div>
+
+                    <div class="col-md-6 mb-3" sec:authorize="hasAuthority('Usuario')">
+                        <label for="lastName" class="form-label">Cantidad:</label>
+                        <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad" readonly>
+
+                    </div>
+
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Estado:</label>
                         <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado"> 
@@ -88,7 +95,7 @@
                 </div>
                 <div class="text-center ">
                     <button type="submit " class="btn btn-primary ">Guardar</button>
-                    <button type="submit " class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
+                    <button type="button" class="btn btn-danger " onclick="cancelForm() ">Cancelar</button>
                 </div>
             </div>
 

@@ -27,8 +27,22 @@
         </script>
         <br>
         <div class="col-md-2 text-center" style="margin-bottom: 2em;">
+        </div>
+    </div>
+
+    <div class="container " style=" padding-bottom: 5%;">
+        <div>
             <a th:href="@{/views/marcas/nueva}"><button type="button" class="btn btn-warning">Nueva marca</button></a>
         </div>
+        <hr>
+        <form th:action="@{/views/marcas/import}" method="post" enctype="multipart/form-data">
+            <label class="form-label">Cargar datos:</label>
+            <div class="input-group">
+                <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Cargar</button>
+            </div>
+            <hr>
+        </form>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
@@ -74,6 +88,8 @@
                             exportOptions: {
                                 columns: [0, 1]
                             },
+                            sheetName: 'marcas',
+                            title: null,
                             className: 'btn-primary',
 
                             split: [, {

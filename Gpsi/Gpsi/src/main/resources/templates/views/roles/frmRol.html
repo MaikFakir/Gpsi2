@@ -16,14 +16,14 @@
     <div class="container" style=" padding: 10%;">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
         <br>
-        <form th:action="@{/views/marcas/save}" method="post" th:object="${marca}">
+        <form th:action="@{/views/roles/save}" method="post" th:object="${roles}">
             <div class="border rounded" style="padding: 3%;">
                 <div class="mb-3">
                     <label for="id" th:if="${id != null}" class="form-label">Id:</label>
                     <input type="number" th:if="${id != null}" class="form-control" th:field="*{id}" placeholder="Marca de la empresa" id="id" name="id" required maxlength="45" readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="marca" class="form-label">Marca:</label>
+                    <label for="marca" class="form-label">Rol</label>
                     <input type="text" class="form-control" th:field="*{name}" placeholder="Marca de la empresa" id="name" name="name" required maxlength="45">
                 </div>
                 <div class="text-center">

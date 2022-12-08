@@ -12,30 +12,26 @@
 
     <div class="b-example-divider2"></div>
 
+
     <div class="container" style=" padding-top: 5%;">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
         <div id="alerta" th:if="${message}" class="alert alert-success text-center">
             [[${message}]]
         </div>
-        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
-            [[${error}]]
-        </div>
         <script>
             setTimeout(function() {
                 $('#alerta').fadeOut('fast');
-            }, 3000);
+            }, 1000);
         </script>
         <br>
-        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
-        </div>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
         <div>
-            <a th:href="@{/views/bitacora_operaciones/nueva}"><button type="button" class="btn btn-warning">Nueva Bitacora</button></a>
+            <a th:href="@{/views/usuarios/nuevo}"><button type="button" class="btn btn-warning">Nuevo Usuario</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/bitacora_operaciones/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/usuarios/import}" method="post" enctype="multipart/form-data">
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -45,49 +41,49 @@
         </form>
     </div>
 
+
+
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
-            <table id="tablaOperaciones" class="table table-striped dt-responsive nowrap" style="width:100%">
+            <table id="tablaUsuarios" class="table table-striped dt-responsive nowrap" style="width:100%">
 
                 <thead class="thead-dark">
                     <tr>
-                        <th class="text-center">ID</th>
-                        <th class="text-center">Gestion Envio</th>
-                        <th class="text-center">Numero Guia</th>
-                        <th class="text-center">Orden</th>
-                        <th class="text-center">Valor Seguro Producto</th>
-                        <th class="text-center">Distancia</th>
-                        <th class="text-center">Estado</th>
-                        <th class="text-center"></th>
-                        <th class="text-center"></th>
+                        <th>ID</th>
+                        <th>E-mail</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Roles</th>
+                        <th>Marcas</th>
+                        <th>Tipo Identificacion</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block th:each="bitacoraOperaciones: ${listbitacoraOperaciones}">
-                        <tr>
-                            <td class="text-center">[[${bitacoraOperaciones.id}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.gestionEnvios.id}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.numGuia}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.Orden}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.valorSeguroProducto}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.distancia}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.estado}]]</td>
-
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/edit/'+ ${bitacoraOperaciones.id}}">Edit</a></td>
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/delete/'+ ${bitacoraOperaciones.id}}">Delete</a></td>
-                        </tr>
-                    </th:block>
+                    <tr th:each="usuario: ${listUsuarios}">
+                        <td th:text="${usuario.id}">User ID</td>
+                        <td th:text="${usuario.email}">E-mail</td>
+                        <td th:text="${usuario.nombres}">First Name</td>
+                        <td th:text="${usuario.apellidos}">Last Name</td>
+                        <td th:text="${usuario.roles}">Roles</td>
+                        <td th:text="${usuario.marca.name}">marcas</td>
+                        <td>
+                            <span th:if="${usuario.tipoDocumento == '1'}">Cedula</span>
+                            <span th:if="${usuario.tipoDocumento == '2'}">Pasaporte</span>
+                        </td>
+                        <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/usuarios/edit/'+ ${usuario.id}}">Editar</a></td>
+                        <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/usuarios/delete/'+ ${usuario.id}}">Borrar</a></td>
+                    </tr>
                 </tbody>
             </table>
 
         </div>
     </div>
 
-
-
     <script>
         $(document).ready(function() {
-            var table = $('#tablaOperaciones').DataTable({
+            var table = $('#tablaUsuarios').DataTable({
                 colReorder: true,
                 deferRender: true,
                 lengthChange: false,
@@ -96,19 +92,18 @@
 
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
                             },
-                            sheetName: 'operaciones',
+                            sheetName: 'usuarios',
                             title: null,
                             className: 'btn-primary',
 
                             split: [, {
                                 extend: 'print',
-                                text: 'Imprimir',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6]
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                                 },
-                                title: 'Bitacora Operaciones',
+                                title: 'Usuarios',
                             }],
                             className: 'btn-primary',
 
@@ -160,7 +155,9 @@
             });
 
             table.buttons().container()
-                .appendTo('#tablaOperaciones_wrapper .col-md-6:eq(0)');
+                .appendTo('#tablaUsuarios_wrapper .col-md-6:eq(0)');
+
+
         });
     </script>
 

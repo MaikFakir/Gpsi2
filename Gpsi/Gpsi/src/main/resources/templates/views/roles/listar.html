@@ -26,16 +26,14 @@
             }, 3000);
         </script>
         <br>
-        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
-        </div>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
         <div>
-            <a th:href="@{/views/bitacora_operaciones/nueva}"><button type="button" class="btn btn-warning">Nueva Bitacora</button></a>
+            <a th:href="@{/views/roles/nueva}"><button type="button" class="btn btn-warning">Nuevo Rol</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/bitacora_operaciones/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/roles/import}" method="post" enctype="multipart/form-data">
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -47,34 +45,24 @@
 
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
-            <table id="tablaOperaciones" class="table table-striped dt-responsive nowrap" style="width:100%">
+            <table id="tablaRoles" class="table table-striped dt-responsive nowrap" style="width:100%">
 
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">ID</th>
-                        <th class="text-center">Gestion Envio</th>
-                        <th class="text-center">Numero Guia</th>
-                        <th class="text-center">Orden</th>
-                        <th class="text-center">Valor Seguro Producto</th>
-                        <th class="text-center">Distancia</th>
-                        <th class="text-center">Estado</th>
+                        <th class="text-center">Rol</th>
                         <th class="text-center"></th>
                         <th class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block th:each="bitacoraOperaciones: ${listbitacoraOperaciones}">
+                    <th:block th:each="rol: ${listRol}">
                         <tr>
-                            <td class="text-center">[[${bitacoraOperaciones.id}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.gestionEnvios.id}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.numGuia}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.Orden}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.valorSeguroProducto}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.distancia}]]</td>
-                            <td class="text-center">[[${bitacoraOperaciones.estado}]]</td>
+                            <td class="text-center">[[${rol.id}]]</td>
+                            <td class="text-center">[[${rol.name}]]</td>
 
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/edit/'+ ${bitacoraOperaciones.id}}">Edit</a></td>
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/bitacora_operaciones/delete/'+ ${bitacoraOperaciones.id}}">Delete</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/roles/edit/'+ ${rol.id}}">Editar</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/roles/delete/'+ ${rol.id}}">Borrar</a></td>
                         </tr>
                     </th:block>
                 </tbody>
@@ -87,7 +75,7 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#tablaOperaciones').DataTable({
+            var table = $('#tablaRoles').DataTable({
                 colReorder: true,
                 deferRender: true,
                 lengthChange: false,
@@ -96,9 +84,9 @@
 
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                columns: [0, 1]
                             },
-                            sheetName: 'operaciones',
+                            sheetName: 'roles',
                             title: null,
                             className: 'btn-primary',
 
@@ -106,9 +94,9 @@
                                 extend: 'print',
                                 text: 'Imprimir',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6]
+                                    columns: [0, 1]
                                 },
-                                title: 'Bitacora Operaciones',
+                                title: 'Roles',
                             }],
                             className: 'btn-primary',
 
@@ -160,7 +148,7 @@
             });
 
             table.buttons().container()
-                .appendTo('#tablaOperaciones_wrapper .col-md-6:eq(0)');
+                .appendTo('#tablaRoles_wrapper .col-md-6:eq(0)');
         });
     </script>
 

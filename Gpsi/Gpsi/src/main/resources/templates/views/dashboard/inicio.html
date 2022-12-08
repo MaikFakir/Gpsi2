@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="plantilla/template :: head">
 
@@ -32,7 +32,7 @@
         <div style="margin-bottom: 1rem;">
 
             <div class="row g-3">
-                <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb" sec:authorize="hasAuthority('Admin')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="https://docs.google.com/spreadsheets/d/1huwUQlzJy1S3-NvwavQiIjm1UGwCmF8D4CxyS5B86jg/edit?usp=sharing" target="_blank">Crear Ruta</a></li>
                         <li class="breadcrumb-item"><a href="">Asignar Mensajero</a></li>
@@ -58,9 +58,120 @@
                         <div class="card-header">Pedidos del dia
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="container ">
+                                <div style="margin-bottom: 1rem;">
+                                    <table id="tablatpProd" class="table table-striped dt-responsive nowrap" style="width:100%" hidden>
+
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-center">Usuario ID</th>
+                                                <th class="text-center">Tipo Producto</th>
+                                                <th class="text-center">Cantidad</th>
+                                                <th class="text-center">Numero Guia</th>
+                                                <th class="text-center">Destino</th>
+                                                <th class="text-center">Estado</th>
+                                                <th class="text-center">Tipo Envio</th>
+                                                <th class="text-center">Tipo Vehiculo</th>
+                                                <th class="text-center">Tamaño Paquete</th>
+                                                <th class="text-center">Fecha Creacion</th>
+                                                <th class="text-center">Fecha Recibido</th>
+                                                <th class="text-center"></th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <th:block th:each="gestionenvios: ${listGestionEnvios}">
+                                                <tr>
+                                                    <td class="text-center">[[${gestionenvios.id}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.usuario.id}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.TipoProd.name}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.cantidad}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.numGuia}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.destino}]]</td>
+                                                    <td>
+                                                        <span th:if="${gestionenvios.estado == '1'}">En Transito</span>
+                                                        <span th:if="${gestionenvios.estado == '2'}">Cancelado</span>
+                                                        <span th:if="${gestionenvios.estado == '3'}">Novedad</span>
+                                                    </td>
+                                                    <td class="text-center">[[${gestionenvios.tipoEnvio}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.tipoVehiculo}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.tamPaquete}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.fechacreacion}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.fechaRecibido}]]</td>
+
+                                                    <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a>
+                                                        <a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                var table = $('#tablatpProd').DataTable({
+                                                    paging: false,
+                                                    ordering: false,
+                                                    info: false,
+                                                    "bPaginate": false,
+                                                    "bFilter": false,
+                                                    "bInfo": false,
+                                                })
+
+                                                // Create the chart with initial data
+                                                var container = $('<div/>').insertBefore(table.table().container());
+
+                                                var chart = Highcharts.chart(container[0], {
+                                                    chart: {
+                                                        type: 'pie',
+                                                    },
+                                                    title: {
+                                                        text: 'Estado',
+                                                    },
+                                                    series: [{
+                                                        data: chartData(table),
+                                                    }, ],
+                                                });
+
+                                                // On each draw, update the data in the chart
+                                                table.on('draw', function() {
+                                                    chart.series[0].setData(chartData(table));
+                                                });
+                                            });
+
+                                            function chartData(table) {
+                                                var counts = {};
+
+                                                // Count the number of entries for each position
+                                                table
+                                                    .column(6, {
+                                                        search: 'applied'
+                                                    })
+                                                    .data()
+                                                    .each(function(val) {
+                                                        if (counts[val]) {
+                                                            counts[val] += 1;
+                                                        } else {
+                                                            counts[val] = 1;
+                                                        }
+                                                    });
+
+                                                // And map it to the format highcharts uses
+                                                return $.map(counts, function(val, key) {
+                                                    return {
+                                                        name: key,
+                                                        y: val,
+                                                    };
+                                                });
+                                            };
+                                        </script>
+
+                                    </table>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,14 +182,17 @@
                         <div class="card-header">Tablas</div>
                         <div class="card-body">
                             <ul class="list-group">
-                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Usuarios</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
-                                <li class="list-group-item"><a th:href="@{/views/enrutador/listar}">Ruta</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/usuarios/listar}">Usuarios</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/roles/listar}">Roles</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Usuarios</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/enrutador/listar}">Ruta</a></li>
+                                <li class="list-group-item" sec:authorize="hasAuthority('Usuario')"><a th:href="@{/views/gestion_envios/listar}">Mis pedidos</a></li>
                         </div>
                     </div>
                 </div>
