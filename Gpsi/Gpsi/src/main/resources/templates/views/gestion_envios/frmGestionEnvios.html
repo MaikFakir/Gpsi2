@@ -16,13 +16,33 @@
     <div class="container" style=" padding: 10%;">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
         <br>
-        <form th:action="@{/views/gestion_envios/save}" method="post" th:object="${gestionenvios}">
+        <form th:action="@{/views/gestion_envios/save}" method="post" th:object="${gestionenvios}" sec:authorize="hasAnyAuthority('Admin','Enrutador')">
             <div class="border rounded" style="padding: 3%;">
 
                 <div class="row g-3">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-6 mb-3" th:if="${#authorization.expression('hasAnyAuthority(''Usuario'')')}">
                         <label for="firstName" class="form-label">Usuario: </label> <small><b>[[${#request.userPrincipal.principal.fullName}]]</b></small>
-                        <input type="text" class="form-control" th:value="${#request.userPrincipal.principal.Identificacion}" th:name="usuario" th:id="usuario" name readonly>
+                        <input type="text" class="form-control" th:value="${#request.userPrincipal.principal.Identificacion}" th:name="usuario" th:id="usuario">
+                    </div>
+
+                    <div class="col-md-6 mb-3" th:if="${#authorization.expression('hasAnyAuthority(''Admin'')')}">
+                        <label for="firstName" class="form-label">Usuarios: </label>
+                        <select th:field="*{usuario}" class="form-control form-control-sm col-md-6"> 
+                            <option th:each="usu :${usuarios}"
+                                th:value="${usu.id}"
+                                th:text="${usu.id}"		
+                            />					
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3" th:if="${#authorization.expression('hasAnyAuthority(''Enrutador'')')}">
+                        <label for="firstName" class="form-label">Usuarios: </label>
+                        <select th:field="*{usuario}" class="form-control form-control-sm col-md-6"> 
+                            <option th:each="usu :${usuarios}"
+                                th:value="${usu.id}"
+                                th:text="${usu.id}"		
+                            />					
+                        </select>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -34,7 +54,7 @@
                         <label for="lastName" class="form-label">Direccion destino:</label>
                         <input type="text" class="form-control" th:field="*{destino}" id="destino" name="destino" required>
                     </div>
-                    <div class="col-md-6 mb-3" sec:authorize="hasAuthority('Admin','Empresa')">
+                    <div class="col-md-6 mb-3" sec:authorize="hasAnyAuthority('Admin','Empresa')">
                         <label for="lastName" class="form-label">Cantidad:</label>
                         <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad">
 
@@ -100,6 +120,92 @@
             </div>
 
         </form>
+
+        <form th:action="@{/views/gestion_envios/save4}" method="post" th:object="${gestionenvios}" sec:authorize="hasAnyAuthority('Usuario')">
+            <div class="border rounded" style="padding: 3%;">
+
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">Usuario: </label> <small><b>[[${#request.userPrincipal.principal.fullName}]]</b></small>
+                        <input type="text" class="form-control" th:value="${#request.userPrincipal.principal.Identificacion}" th:name="usuario" th:id="usuario" name readonly>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Numero Guia</label>
+                        <input type="text" class="form-control" th:field="*{numGuia}" id="numGuia" name="numGuia" required>
+
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Direccion destino:</label>
+                        <input type="text" class="form-control" th:field="*{destino}" id="destino" name="destino" required>
+                    </div>
+                    <div class="col-md-6 mb-3" sec:authorize="hasAnyAuthority('Admin','Empresa')">
+                        <label for="lastName" class="form-label">Cantidad:</label>
+                        <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad">
+
+                    </div>
+
+                    <div class="col-md-6 mb-3" sec:authorize="hasAuthority('Usuario')">
+                        <label for="lastName" class="form-label">Cantidad:</label>
+                        <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad" readonly>
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Estado:</label>
+                        <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado"> 
+                            <option value="1">Transito</option>					
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName" class="form-label">Tipo Producto: </label>
+                        <select th:field="*{tipoProd}" class="form-control form-control-sm col-md-6"> 
+                            <option th:each="tp:${tpProd}"
+                                th:value="${tp.id}"
+                                th:text="${tp.name}"		
+                            />					
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Tipo Envio:</label>
+                        <select th:field="*{tipoEnvio}" class="form-control form-control-sm col-md-6"> 
+                            <option value="1">Standar</option>
+                            <option value="2">Express</option>						
+                    </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName" class="form-label">Tipo Vehiculo:</label>
+                        <select th:field="*{tipoVehiculo}" class="form-control form-control-sm col-md-6"> 
+                            <option value="1">Moto</option>
+                            <option value="2">Carro</option>						
+                            <option value="3">Camioneta</option>						
+                    </select>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <label for="lastName" class="form-label">Tamaño Paquete:</label>
+                        <select th:field="*{tamPaquete}" class="form-control form-control-sm col-md-6"> 
+                            <option value="1">Pequeño</option>
+                            <option value="2">Mediano</option>						
+                            <option value="3">Grande</option>						
+                    </select>
+                    </div>
+
+
+
+
+                </div>
+                <div class="text-center ">
+                    <button type="submit " class="btn btn-primary ">Guardar</button>
+                    <button type="button" class="btn btn-danger " onclick="cancelForm2() " sec:authorize="hasAnyAuthority('Usuario')">Cancelar</button>
+                    <button type="button" class="btn btn-danger " onclick="cancelForm() " sec:authorize="hasAnyAuthority('Admin','Empresa')">Cancelar</button>
+                </div>
+            </div>
+
+        </form>
     </div>
 
     <div class="b-example-divider2 "></div>
@@ -110,6 +216,12 @@
     <script type="text/javascript">
         function cancelForm() {
             window.location = "[[@{/views/gestion_envios/listar}]] ";
+        }
+    </script>
+
+    <script type="text/javascript">
+        function cancelForm2() {
+            window.location = "[[@{/views/gestion_envios/Mis_Pedidos}]] ";
         }
     </script>
 

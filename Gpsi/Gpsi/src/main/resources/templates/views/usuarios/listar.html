@@ -21,7 +21,7 @@
         <script>
             setTimeout(function() {
                 $('#alerta').fadeOut('fast');
-            }, 1000);
+            }, 3000);
         </script>
         <br>
     </div>
@@ -31,7 +31,7 @@
             <a th:href="@{/views/usuarios/nuevo}"><button type="button" class="btn btn-warning">Nuevo Usuario</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/usuarios/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/usuarios/import}" method="post" enctype="multipart/form-data" hidden>
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -92,7 +92,7 @@
 
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                                columns: [0, 1, 2, 3, 4, 5, 6]
                             },
                             sheetName: 'usuarios',
                             title: null,
@@ -101,7 +101,7 @@
                             split: [, {
                                 extend: 'print',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                                    columns: [0, 1, 2, 3, 4, 5, 6]
                                 },
                                 title: 'Usuarios',
                             }],

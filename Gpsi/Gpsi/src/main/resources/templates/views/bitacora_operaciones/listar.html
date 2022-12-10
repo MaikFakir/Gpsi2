@@ -35,7 +35,7 @@
             <a th:href="@{/views/bitacora_operaciones/nueva}"><button type="button" class="btn btn-warning">Nueva Bitacora</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/bitacora_operaciones/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/bitacora_operaciones/import}" method="post" enctype="multipart/form-data" hidden>
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">

@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.Gpsi.Entity.GestionEnvios;
 import com.proyecto.Gpsi.Repository.GestionEnviosRepository;
 import com.proyecto.Gpsi.Repository.GestionEnviosRepository2;
+import com.proyecto.Gpsi.Security.CustomUserDetails;
 import com.proyecto.Gpsi.Util.GestionEnviosNotFoundException;
 
 @Service
@@ -23,6 +25,7 @@ public class GestionEnviosService {
     public List<GestionEnvios> listGestionEnvios() {
         return (List<GestionEnvios>) repo.findAll();
     }
+
 
     public void save(GestionEnvios gestionEnvios) {
         repo.save(gestionEnvios);
@@ -57,15 +60,24 @@ public class GestionEnviosService {
 
     } */
 
-    public Optional<GestionEnvios> findById(Integer id) throws Exception {
+    public Optional<GestionEnvios> findById(String id) throws Exception {
 
         try {
-            Optional<GestionEnvios> entities = this.repo.findById(id);
+            Optional<GestionEnvios> entities = this.repo2.findById(id);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-        
-    
+
+    public List<GestionEnvios> findByIdEnvios(Integer id) throws Exception {
+
+        try {
+            List<GestionEnvios> entities = this.repo2.findByGestionEnvios(id);
+            return entities;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 }

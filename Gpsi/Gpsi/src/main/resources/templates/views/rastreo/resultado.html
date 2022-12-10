@@ -33,39 +33,49 @@
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
 
-            <div class="list-group">
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">ID</h5>
-                    </div>
-                    <p class="mb-1"><input type="text" th:field="${pedido.numGuia}" class="form-control" readonly/></p>
-                </a>
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Nombres</h5>
-                    </div>
-                    <p class="mb-1"><input type="text" th:field="${pedido.usuario.fullName}" class="form-control" readonly/></p>
-                    <small class="text-muted"></small>
-                </a>
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Estado</h5>
-                    </div>
-                    <p class="mb-1"><input type="text" th:field="${pedido.estado}" class="form-control" readonly/></p>
-                </a>
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Tipo Vehiculo</h5>
-                    </div>
-                    <p class="mb-1"><input type="text" th:field="${pedido.tipoVehiculo}" class="form-control" readonly/></p>
-                </a>
-                <a class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Fecha Creación</h5>
-                    </div>
-                    <p class="mb-1"><input type="text" th:field="${pedido.fechacreacion}" class="form-control" readonly/></p>
-                </a>
-            </div>
+            <form th:action="@{/views/gestion_envios/save2}" method="post" th:object="${pedido}">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">ID</h5>
+                        </div>
+                        <p class="mb-1"><input type="text" th:field="${pedido.numGuia}" class="form-control" readonly/></p>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Nombres</h5>
+                        </div>
+                        <p class="mb-1"><input type="text" th:field="${pedido.usuario.fullName}" class="form-control" readonly/></p>
+                        <small class="text-muted"></small>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <label for="lastName" class="form-label">Estado:</label>
+                        <div class="d-flex w-100 justify-content-between">
+                            <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado" disabled> 
+                                <option value="1">Transito</option>
+                                <option value="2">Cancelado</option>
+                                <option value="3">Novedad</option>						
+                        </select>
+                        </div>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <label for="lastName" class="form-label">Estado:</label>
+                        <div class="d-flex w-100 justify-content-between">
+                            <select th:field="*{tipoVehiculo}" class="form-control form-control-sm col-md-6" disabled> 
+                                <option value="1">Moto</option>
+                                <option value="2">Carro</option>						
+                                <option value="3">Camioneta</option>						
+                        </select>
+                        </div>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">Fecha Creación</h5>
+                        </div>
+                        <p class="mb-1"><input type="text" th:field="${pedido.fechacreacion}" class="form-control" readonly/></p>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

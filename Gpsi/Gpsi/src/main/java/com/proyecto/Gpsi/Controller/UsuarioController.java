@@ -59,6 +59,12 @@ import com.proyecto.Gpsi.Util.UsuarioNotFoundException2;
          return "redirect:/views/usuarios/listar";
      }
 
+     @PostMapping("/save2")
+     public String guardarUsuario2(Usuario usuario, Model model) {
+         service.save2(usuario);
+         return "redirect:/views/usuarios/listar";
+     }
+
      
  
      @GetMapping("/edit/{id}")
@@ -72,8 +78,8 @@ import com.proyecto.Gpsi.Util.UsuarioNotFoundException2;
              model.addAttribute("listRoles", listRoles);
 		     model.addAttribute("listMarcas", listMarca);
              model.addAttribute("title","Editar Usuario (ID: "+ id+ ")");
-             model.addAttribute("alerta","Si no desea cambiar la contraseña, deje el cambio en blanco!");
-             return "/views/usuarios/frmUsuario";
+             
+             return "/views/usuarios/frmUsuarioED";
      }
  
      @GetMapping("/delete/{id}")

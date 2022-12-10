@@ -53,6 +53,9 @@
                     <th:block th:each="user: ${user2}">
                         <a class="btn btn-primary" th:value="${user.id}" th:href="@{'/views/dashboard/edit/'+ ${user.id}}">Edit</a>
                     </th:block>
+                    <div style="margin-top: 1rem;">
+                        <a th:href="@{/forgot_password} ">Desea cambiar su contraseña?</a>
+                    </div>
                     <hr>
                 </div>
                 <div class="card-footer text-muted ">

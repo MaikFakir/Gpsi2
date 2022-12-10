@@ -48,8 +48,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/views/dashboard/**","/views/bitacora_operaciones/**","/views/enrutador/**","/gestion_envios/**","/marcas/**","/views/roles/**","/views/seguimiento/**","/views/tpProd/**","/views/usuarios/**").authenticated()
+			.antMatchers("/views/dashboard/**","/views/bitacora_operaciones/**","/views/enrutador/**","/views/gestion_envios/**","/marcas/**","/views/roles/**","/views/seguimiento/**","/views/tpProd/**","/views/usuarios/**","/views/gestion_envios/**","/logout").authenticated()
 			.antMatchers("/views/roles/**").hasAuthority("Admin")
+			.antMatchers("/views/gestion_envios/Mis_Pedidos","/views/gestion_envios/nueva").hasAnyAuthority("Usuario")
+			.antMatchers("/views/marcas/**","/views/gestion_envios/listar","/views/gestion_envios/nueva","/views/ruta/listar","/views/ruta/frmRuta").hasAnyAuthority("Admin","Enrutador")
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()

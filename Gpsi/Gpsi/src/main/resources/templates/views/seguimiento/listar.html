@@ -33,7 +33,7 @@
             <a th:href="@{/views/seguimiento/nueva}"><button type="button" class="btn btn-warning">Nuevo Seguimiento</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/seguimiento/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/seguimiento/import}" method="post" enctype="multipart/form-data" hidden>
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -64,9 +64,13 @@
                     <th:block th:each="segui: ${listSeguimiento} ">
                         <tr>
                             <td class="text-center ">[[${segui.id}]]</td>
-                            <td class="text-center ">[[${segui.estado}]]</td>
+                            <td>
+                                <span th:if="${segui.estado == '1'}">En Transito</span>
+                                <span th:if="${segui.estado == '2'}">Cancelado</span>
+                                <span th:if="${segui.estado == '3'}">Novedad</span>
+                            </td>
                             <td class="text-center ">[[${segui.num_Intentos}]]</td>
-                            <td class="text-center ">[[${segui.gestionenvios.id}]]</td>
+                            <td class="text-center ">[[${segui.gestionenvios.numGuia}]]</td>
                             <td class="text-center ">[[${segui.enrutador.id}]]</td>
                             <td class="text-center ">[[${segui.novedades}]]</td>
 

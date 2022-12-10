@@ -156,6 +156,10 @@ public class UsuarioServices {
         return (List<Usuario>) repo2.findAll();
     }
 
+	public List<Usuario> ListMensajero() {
+        return (List<Usuario>) repo.findMensajero();
+    }
+
 	public void save(Usuario usuario) {
 		encodePassword(usuario);		
         repo2.save(usuario);

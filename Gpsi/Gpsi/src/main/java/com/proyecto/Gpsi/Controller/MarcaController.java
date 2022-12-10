@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.Gpsi.Entity.Marca;
 import com.proyecto.Gpsi.Service.MarcaService;
+import com.proyecto.Gpsi.Service.ExcelUploadService;
 import com.proyecto.Gpsi.Util.MarcaNotFoundException;
 
 @Controller
@@ -24,6 +27,9 @@ public class MarcaController {
 
 	@Autowired
     private MarcaService service;
+
+	@Autowired
+    private ExcelUploadService service2;
 
 	@GetMapping("/listar")
 	public String listMarca(Model model) {
@@ -74,6 +80,17 @@ public class MarcaController {
 		}
 		return "redirect:/views/marcas/listar";
 	}
+
+	@PostMapping("/import")
+    public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model,RedirectAttributes ra) {
+		try {
+			service2.storeMarca(file);
+			ra.addFlashAttribute("message", "File uploaded successfully!");
+		} catch (Exception e) {
+			ra.addFlashAttribute("message", "Fail! -> uploaded filename: " + file.getOriginalFilename());
+		}
+        return "redirect:/views/marcas/listar";
+    }
 
 
 }

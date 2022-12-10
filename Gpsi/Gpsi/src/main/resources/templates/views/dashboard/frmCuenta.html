@@ -12,10 +12,25 @@
 
     <div class="b-example-divider2"></div>
 
-
-    <div class="container" style=" padding: 10%;">
+    <div class="container" style=" padding-top: 5%; ">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
-        <br>
+        <div id="alerta" th:if="${message}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
+        <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
+            [[${alerta}]]
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#alerta').fadeOut('fast');
+            }, 3000);
+        </script>
+    </div>
+
+    <div class="container" style="padding-bottom: 5%;">
         <form th:action="@{/views/dashboard/save2}" method="post" th:object="${usu}">
             <div class="border rounded" style="padding: 3%;">
 
@@ -50,20 +65,20 @@
                         <label for="marca" class="form-label">Email:</label>
                         <input type="text" class="form-control" th:field="*{email}" id="email" name="email" required maxlength="45">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" hidden>
                         <label for="marca" class="form-label">Contraseña:</label>
-                        <input type="password" class="form-control" th:field="*{contraseña}" id="contraseña" name="contraseña" maxlength="45">
+                        <input type="text" class="form-control" th:field="*{contraseña}" id="contraseña" name="contraseña" maxlength="45">
                     </div>
 
 
-                    <div class="mb-3">
+                    <div class="mb-3" sec:authorize="hasAuthority('Admin')">
                         <th:block th:each="role: ${listRoles}">
                             <input type="checkbox" th:field="*{roles}" th:text="${role.name}" th:value="${role.id}" class="m-2" />
                         </th:block>
                     </div>
 
 
-                    <div class="mb-3">
+                    <div class="mb-3" sec:authorize="hasAuthority('Admin')">
 
                         <select class="form-select" aria-label="Default select example" th:field="*{marca}">
                             <option th:each="marca: ${listMarcas}"

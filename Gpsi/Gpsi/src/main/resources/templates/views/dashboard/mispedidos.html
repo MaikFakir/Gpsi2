@@ -26,21 +26,6 @@
         <br>
     </div>
 
-    <div class="container ">
-        <div>
-            <a th:href="@{/views/gestion_envios/nueva}"><button type="button" class="btn btn-warning" sec:authorize="hasAnyAuthority('Admin','Enrutador')">Nuevo Envio </button></a>
-        </div>
-        <hr>
-        <form th:action="@{/views/gestion_envios/import}" method="post" enctype="multipart/form-data" sec:authorize="hasAuthority('Admin')" hidden>
-            <label class="form-label">Cargar datos:</label>
-            <div class="input-group">
-                <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Cargar</button>
-            </div>
-            <hr>
-        </form>
-    </div>
-
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
             <table id="tablaEnvios" class="table table-striped dt-responsive nowrap" style="width:100%">
@@ -59,12 +44,11 @@
                         <th class="text-center">Fecha Creacion</th>
                         <th class="text-center">Fecha Recibido</th>
                         <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
-                        <th class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"></th>
                         <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block th:each="gestionenvios: ${listGestionEnvios}">
+                    <th:block th:each="gestionenvios: ${pedido}">
                         <tr>
                             <td class="text-center">[[${gestionenvios.id}]]</td>
                             <td class="text-center">[[${gestionenvios.usuario.id}]]</td>
@@ -83,10 +67,11 @@
                             <td class="text-center">[[${gestionenvios.fechacreacion}]]</td>
                             <td class="text-center">[[${gestionenvios.fechaRecibido}]]</td>
 
-                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
-                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a></td>
-                            <td class="text-center" sec:authorize="hasAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a></td>
-
+                            <td class="text-center" sec:authorize="hasAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
+                            <td class="text-center" sec:authorize="hasAuthority('Admin')">
+                                <a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a>
+                                <a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a>
+                            </td>
                         </tr>
                     </th:block>
                 </tbody>

@@ -15,15 +15,12 @@
 
     <div class="container" style=" padding: 10%;">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
-        <div id="alerta" th:if="${alerta}" class="alert alert-success text-center">
-            [[${message}]]
-        </div>
         <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
             [[${alerta}]]
         </div>
         <br>
 
-        <form th:action="@{/views/usuarios/save}" method="post" th:object="${usu}">
+        <form th:action="@{/views/usuarios/save2}" method="post" th:object="${usu}">
             <div class="border rounded" style="padding: 3%;">
 
                 <div class="form-floating mb-3 ">
@@ -55,8 +52,8 @@
                     <input type="email" class="form-control " th:field="*{email}" name="email" placeholder="name@example.com " required>
                     <label for="email ">Correo</label>
                 </div>
-                <div class="form-floating mb-3 ">
-                    <input type="password" class="form-control " th:field="*{contraseña}" name="contraseña" placeholder="Contraseña" autocomplete="off ">
+                <div class="form-floating mb-3 " hidden>
+                    <input type="text" class="form-control " th:field="*{contraseña}" name="contraseña" placeholder="Contraseña" autocomplete="off ">
                     <label for="contraseña">Contraseña</label>
                 </div>
                 <div class="form-floating mb-3 ">

@@ -61,6 +61,7 @@ public class CuentaController {
 		model.addAttribute("listRoles", listRoles);
 		model.addAttribute("listMarcas", listMarca);
         model.addAttribute("title", "Editar Usuario (ID: " + id + ")");
+        model.addAttribute("alerta","Si desea cambiar su contraseña, en la pesataña anterior puede hacerlo!");
 		return "/views/dashboard/frmCuenta";
 		
 		

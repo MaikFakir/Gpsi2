@@ -30,11 +30,10 @@ public class RastreoController {
 	}
 
     @GetMapping(value = "/busqueda")
-    public String bucarporid(Model model, @RequestParam(value ="id",required = false)Integer id){
+    public String bucarporid(Model model, @RequestParam(value ="id",required = false)String id){
         try {
             Optional<GestionEnvios> gestionenvios = this.service.findById(id);
-            model.addAttribute("pedido", gestionenvios);
-            model.addAttribute("resultado",id);
+            model.addAttribute("pedido", gestionenvios);;
             model.addAttribute("title", "Mi pedido.");
             model.addAttribute("message","Se ha cargado correctamente su pedido.");
             return "/views/rastreo/resultado";

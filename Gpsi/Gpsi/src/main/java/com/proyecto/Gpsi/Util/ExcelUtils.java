@@ -9,10 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -20,103 +16,155 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.proyecto.Gpsi.Entity.Marca;
 import com.proyecto.Gpsi.Entity.Rol;
-
+import com.proyecto.Gpsi.Entity.TipoProd;
 
 public class ExcelUtils {
-	
+
 	public static List<Rol> parseExcelFile(InputStream is) {
 		try {
-    		Workbook workbook = new XSSFWorkbook(is);
-     
-    		Sheet sheet = workbook.getSheet("roles");
-    		Iterator<Row> rows = sheet.iterator();
-    		
-    		List<Rol> lstCustomers = new ArrayList<Rol>();
-    		
-    		int rowNumber = 0;
-    		while (rows.hasNext()) {
-    			Row currentRow = rows.next();
-    			
-    			// skip header
-    			if(rowNumber == 0) {
-    				rowNumber++;
-    				continue;
-    			}
-    			
-    			Iterator<Cell> cellsInRow = currentRow.iterator();
+			Workbook workbook = new XSSFWorkbook(is);
 
-    			Rol cust = new Rol();
-    			
-    			int cellIndex = 0;
-    			while (cellsInRow.hasNext()) {
-    				Cell currentCell = cellsInRow.next();
-    				
-    				if(cellIndex==0) { // ID
-    					cust.setId((int) currentCell.getNumericCellValue());
-    				} else if(cellIndex==1) { // Name
-    					cust.setName(currentCell.getStringCellValue());
-    				}
-    				
-    				cellIndex++;
-    			}
-    			
-    			lstCustomers.add(cust);
-    		}
-    		
-    		// Close WorkBook
-    		workbook.close();
-    		
-    		return lstCustomers;
-        } catch (IOException e) {
-        	throw new RuntimeException("FAIL! -> message = " + e.getMessage());
-        }
+			Sheet sheet = workbook.getSheet("roles");
+			Iterator<Row> rows = sheet.iterator();
+
+			List<Rol> lstCustomers = new ArrayList<Rol>();
+
+			int rowNumber = 0;
+			while (rows.hasNext()) {
+				Row currentRow = rows.next();
+
+				// skip header
+				if (rowNumber == 0) {
+					rowNumber++;
+					continue;
+				}
+
+				Iterator<Cell> cellsInRow = currentRow.iterator();
+
+				Rol cust = new Rol();
+
+				int cellIndex = 0;
+				while (cellsInRow.hasNext()) {
+					Cell currentCell = cellsInRow.next();
+
+					if (cellIndex == 0) { // ID
+						cust.setId((int) currentCell.getNumericCellValue());
+					} else if (cellIndex == 1) { // Name
+						cust.setName(currentCell.getStringCellValue());
+					}
+
+					cellIndex++;
+				}
+
+				lstCustomers.add(cust);
+			}
+
+			// Close WorkBook
+			workbook.close();
+
+			return lstCustomers;
+		} catch (IOException e) {
+			throw new RuntimeException("FAIL! -> message = " + e.getMessage());
+		}
 	}
 
 	public static List<Marca> parseExcelFileMarcas(InputStream is) {
 		try {
-    		Workbook workbook = new XSSFWorkbook(is);
-     
-    		Sheet sheet = workbook.getSheet("marcas");
-    		Iterator<Row> rows = sheet.iterator();
-    		
-    		List<Marca> lstMarcas = new ArrayList<Marca>();
-    		
-    		int rowNumber = 0;
-    		while (rows.hasNext()) {
-    			Row currentRow = rows.next();
-    			
-    			// skip header
-    			if(rowNumber == 0) {
-    				rowNumber++;
-    				continue;
-    			}
-    			
-    			Iterator<Cell> cellsInRow = currentRow.iterator();
+			Workbook workbook = new XSSFWorkbook(is);
 
-    			Marca mar = new Marca();
-    			
-    			int cellIndex = 0;
-    			while (cellsInRow.hasNext()) {
-    				Cell currentCell = cellsInRow.next();
-    				
-    				if(cellIndex==0) { // ID
-    					mar.setId((int) currentCell.getNumericCellValue());
-    				} else if(cellIndex==1) { // Name
-    					mar.setName(currentCell.getStringCellValue());
-    				}
-    				
-    				cellIndex++;
-    			}
-    			
-    			lstMarcas.add(mar);
-    		}
-    		
-    		// Close WorkBook
-    		workbook.close();
-    		
-    		return lstMarcas;
-        } catch (IOException e) {
-        	throw new RuntimeException("FAIL! -> message = " + e.getMessage());
-        }
+			Sheet sheet = workbook.getSheet("marcas");
+			Iterator<Row> rows = sheet.iterator();
+
+			List<Marca> lstMarcas = new ArrayList<Marca>();
+
+			int rowNumber = 0;
+			while (rows.hasNext()) {
+				Row currentRow = rows.next();
+
+				// skip header
+				if (rowNumber == 0) {
+					rowNumber++;
+					continue;
+				}
+
+				Iterator<Cell> cellsInRow = currentRow.iterator();
+
+				Marca mar = new Marca();
+
+				int cellIndex = 0;
+				while (cellsInRow.hasNext()) {
+					Cell currentCell = cellsInRow.next();
+
+					if (cellIndex == 0) { // ID
+						mar.setId((int) currentCell.getNumericCellValue());
+					} else if (cellIndex == 1) { // Name
+						mar.setName(currentCell.getStringCellValue());
+					}
+
+					cellIndex++;
+				}
+
+				lstMarcas.add(mar);
+			}
+
+			// Close WorkBook
+			workbook.close();
+
+			return lstMarcas;
+		} catch (IOException e) {
+			throw new RuntimeException("FAIL! -> message = " + e.getMessage());
+		}
 	}
+
+	public static List<TipoProd> parseExcelFileTipoProd(InputStream is) {
+		try {
+			Workbook workbook = new XSSFWorkbook(is);
+
+			Sheet sheet = workbook.getSheet("tipo_prod");
+			Iterator<Row> rows = sheet.iterator();
+
+			List<TipoProd> lstTipoProd = new ArrayList<TipoProd>();
+
+			int rowNumber = 0;
+			while (rows.hasNext()) {
+				Row currentRow = rows.next();
+
+				// skip header
+				if (rowNumber == 0) {
+					rowNumber++;
+					continue;
+				}
+
+				Iterator<Cell> cellsInRow = currentRow.iterator();
+
+				TipoProd tp = new TipoProd();
+
+				int cellIndex = 0;
+				while (cellsInRow.hasNext()) {
+					Cell currentCell = cellsInRow.next();
+
+					if (cellIndex == 0) { // ID
+						tp.setId((int) currentCell.getNumericCellValue());
+					} else if (cellIndex == 1) { // Name
+						tp.setName(currentCell.getStringCellValue());
+					}
+
+					cellIndex++;
+				}
+
+				lstTipoProd.add(tp);
+			}
+
+			// Close WorkBook
+			workbook.close();
+
+			return lstTipoProd;
+		} catch (IOException e) {
+			throw new RuntimeException("FAIL! -> message = " + e.getMessage());
+		}
+	}
+
+	
+
+
 }

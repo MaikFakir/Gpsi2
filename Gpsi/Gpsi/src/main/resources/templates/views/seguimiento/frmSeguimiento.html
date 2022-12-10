@@ -26,7 +26,11 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="firstName" class="form-label">Estado: </label>
-                        <input type="text" class="form-control" th:field="*{estado}">
+                        <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado"> 
+                            <option value="1">Transito</option>
+                            <option value="2">Cancelado</option>
+                            <option value="3">Novedad</option>						
+                    </select>
                     </div>
 
                     <div class=" col-md-6 mb-3 ">

@@ -12,7 +12,7 @@
 
     <div class="b-example-divider2"></div>
 
-    <div class="container" style=" padding-top: 5%;">
+    <div class="container" style=" padding-top: 5%; ">
         <h1 class="display-4 fw-bold lh-1 mb-3 text-center ">[[${title}]]</h1>
         <div id="alerta" th:if="${message}" class="alert alert-success text-center">
             [[${message}]]
@@ -20,24 +20,24 @@
         <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
             [[${error}]]
         </div>
+        <div id="alerta" th:if="${alerta}" class="alert alert-warning text-center">
+            [[${alerta}]]
+        </div>
         <script>
             setTimeout(function() {
                 $('#alerta').fadeOut('fast');
             }, 3000);
         </script>
-        <br>
     </div>
 
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
 
             <div class="row g-3">
-                <nav aria-label="breadcrumb" sec:authorize="hasAuthority('Admin')">
+                <nav aria-label="breadcrumb" sec:authorize="hasAnyAuthority('Admin','Enrutador')">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="https://docs.google.com/spreadsheets/d/1huwUQlzJy1S3-NvwavQiIjm1UGwCmF8D4CxyS5B86jg/edit?usp=sharing" target="_blank">Crear Ruta</a></li>
-                        <li class="breadcrumb-item"><a href="">Asignar Mensajero</a></li>
-                        <li class="breadcrumb-item"><a href="">Crear envio Manual</a></li>
-                    </ol>
+                        <li class="breadcrumb-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/ruta/listar}">Asignar Mensajero</a></li>
                 </nav>
 
                 <div class="col-md-4 mb-3">
@@ -80,8 +80,36 @@
                                                 <th class="text-center"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody sec:authorize="hasAuthority('Usuario')">
                                             <th:block th:each="gestionenvios: ${listGestionEnvios}">
+                                                <tr>
+                                                    <td class="text-center">[[${gestionenvios.id}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.usuario.id}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.TipoProd.name}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.cantidad}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.numGuia}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.destino}]]</td>
+                                                    <td>
+                                                        <span th:if="${gestionenvios.estado == '1'}">En Transito</span>
+                                                        <span th:if="${gestionenvios.estado == '2'}">Cancelado</span>
+                                                        <span th:if="${gestionenvios.estado == '3'}">Novedad</span>
+                                                    </td>
+                                                    <td class="text-center">[[${gestionenvios.tipoEnvio}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.tipoVehiculo}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.tamPaquete}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.fechacreacion}]]</td>
+                                                    <td class="text-center">[[${gestionenvios.fechaRecibido}]]</td>
+
+                                                    <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a>
+                                                        <a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </tbody>
+                                        <tbody sec:authorize="hasAnyAuthority('Admin','Enrutador')">
+                                            <th:block th:each="gestionenvios: ${listGestionEnvios22}">
                                                 <tr>
                                                     <td class="text-center">[[${gestionenvios.id}]]</td>
                                                     <td class="text-center">[[${gestionenvios.usuario.id}]]</td>
@@ -182,17 +210,15 @@
                         <div class="card-header">Tablas</div>
                         <div class="card-body">
                             <ul class="list-group">
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Usuario', 'Admin','Usuario')"><a th:href="@{/views/gestion_envios/Mis_Pedidos}">Mis pedidos</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/usuarios/listar}">Usuarios</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/roles/listar}">Roles</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Usuarios</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/enrutador/listar}">Ruta</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Usuario')"><a th:href="@{/views/gestion_envios/listar}">Mis pedidos</a></li>
                         </div>
                     </div>
                 </div>
@@ -200,6 +226,25 @@
 
         </div>
     </div>
+
+    <!-- Smartsupp Live Chat script -->
+    <script type="text/javascript" sec:authorize="hasAnyAuthority('Usuario')">
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = '44d89a4964208e97d1989eed4e9dcdbc5f6063ff';
+        window.smartsupp || (function(d) {
+            var s, c, o = smartsupp = function() {
+                o._.push(arguments)
+            };
+            o._ = [];
+            s = d.getElementsByTagName('script')[0];
+            c = d.createElement('script');
+            c.type = 'text/javascript';
+            c.charset = 'utf-8';
+            c.async = true;
+            c.src = 'https://www.smartsuppchat.com/loader.js?';
+            s.parentNode.insertBefore(c, s);
+        })(document);
+    </script>
 
 
 

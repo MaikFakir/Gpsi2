@@ -3,8 +3,10 @@ package com.proyecto.Gpsi.Controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.Gpsi.Entity.GestionEnvios;
 import com.proyecto.Gpsi.Entity.TipoProd;
 import com.proyecto.Gpsi.Entity.Usuario;
+import com.proyecto.Gpsi.Repository.GestionEnviosRepository2;
+import com.proyecto.Gpsi.Security.CustomUserDetails;
 import com.proyecto.Gpsi.Service.GestionEnviosService;
 import com.proyecto.Gpsi.Service.TipoProdService;
 import com.proyecto.Gpsi.Service.UsuarioServices;
@@ -30,6 +34,8 @@ public class GestionEnviosController {
 
 	@Autowired
 	private GestionEnviosService service;
+	@Autowired
+	private GestionEnviosRepository2 repo;
 
 	@Autowired
 	private TipoProdService service2;
@@ -45,8 +51,25 @@ public class GestionEnviosController {
 		model.addAttribute("title", "Listar Gestion Envios");
 
 		return "/views/gestion_envios/listar";
+	
 	}
 
+	@GetMapping(value = "/Mis_Pedidos")
+    public String bucarporid(@AuthenticationPrincipal CustomUserDetails loggedUser,Model model,Integer id){
+        try {
+
+			id =loggedUser.getIdentificacion();
+
+            List<GestionEnvios> gestionenvios = this.service.findByIdEnvios(id);
+            model.addAttribute("pedido", gestionenvios);
+            model.addAttribute("title", "Mi pedido.");
+            model.addAttribute("message","Se ha cargado correctamente su pedido.");
+            return "/views/dashboard/mispedidos";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+    }
 
 	@GetMapping("/nueva")
 	public String nuevaGestionEnvios(Model model) {
@@ -64,12 +87,12 @@ public class GestionEnviosController {
 
 	@PostMapping("/save")
 	public String guardarGestion(GestionEnvios gestionEnvios, RedirectAttributes ra) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTimeString = now.format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String dateTimeString = now.format(formatter);
 
-        gestionEnvios.setFechacreacion(dateTimeString);
-        gestionEnvios.setFechaRecibido("0000-00-00 00:00");
+		gestionEnvios.setFechacreacion(dateTimeString);
+		gestionEnvios.setFechaRecibido("0000-00-00 00:00");
 		service.save(gestionEnvios);
 		ra.addFlashAttribute("message", "La gestion ha sido guardada correctamente!");
 		return "redirect:/views/gestion_envios/listar";
@@ -77,7 +100,6 @@ public class GestionEnviosController {
 
 	@PostMapping("/save2")
 	public String guardarGestion2(GestionEnvios gestionEnvios, RedirectAttributes ra) {
-
 
 		service.save(gestionEnvios);
 		ra.addFlashAttribute("message", "La gestion ha sido guardada correctamente!");
@@ -87,15 +109,27 @@ public class GestionEnviosController {
 	@PostMapping("/save3")
 	public String entregarGestion3(GestionEnvios gestionEnvios, RedirectAttributes ra) {
 
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTimeString = now.format(formatter);
-        gestionEnvios.setFechaRecibido(dateTimeString);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String dateTimeString = now.format(formatter);
+		gestionEnvios.setFechaRecibido(dateTimeString);
 
 		service.save(gestionEnvios);
 		ra.addFlashAttribute("message", "La gestion ha sido entregada correctamente!");
 		return "redirect:/views/gestion_envios/listar";
+	}
+
+	@PostMapping("/save4")
+	public String entregarGestion4(GestionEnvios gestionEnvios, RedirectAttributes ra) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		String dateTimeString = now.format(formatter);
+
+		gestionEnvios.setFechacreacion(dateTimeString);
+		gestionEnvios.setFechaRecibido("0000-00-00 00:00");
+		service.save(gestionEnvios);
+		ra.addFlashAttribute("message", "La gestion ha sido guardada correctamente!");
+		return "redirect:/views/dashboard/Mis_Pedidos";
 	}
 
 	@GetMapping("/entregar/{id}")
@@ -144,5 +178,4 @@ public class GestionEnviosController {
 		return "redirect:/views/gestion_envios/listar";
 	}
 
-	
 }

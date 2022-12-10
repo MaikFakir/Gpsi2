@@ -17,11 +17,13 @@
         <div id="alerta" th:if="${message}" class="alert alert-success text-center">
             [[${message}]]
         </div>
-
+        <div id="alerta" th:if="${error}" class="alert alert-danger text-center">
+            [[${error}]]
+        </div>
         <script>
             setTimeout(function() {
                 $('#alerta').fadeOut('fast');
-            }, 1000);
+            }, 3000);
         </script>
         <br>
     </div>

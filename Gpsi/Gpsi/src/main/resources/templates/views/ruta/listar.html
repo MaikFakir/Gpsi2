@@ -26,16 +26,14 @@
             }, 3000);
         </script>
         <br>
-        <div class="col-md-2 text-center" style="margin-bottom: 2em;">
-        </div>
     </div>
 
-    <div class="container " style=" padding-bottom: 5%;" sec:authorize="hasAuthority('Admin')">
+    <div class="container " style=" padding-bottom: 5%;">
         <div>
-            <a th:href="@{/views/marcas/nueva}"><button type="button" class="btn btn-warning">Nueva marca</button></a>
+            <a th:href="@{/views/ruta/nueva}"><button type="button" class="btn btn-warning">Nuevo Ruta</button></a>
         </div>
         <hr>
-        <form th:action="@{/views/marcas/import}" method="post" enctype="multipart/form-data">
+        <form th:action="@{/views/roles/import}" method="post" enctype="multipart/form-data" hidden>
             <label class="form-label">Cargar datos:</label>
             <div class="input-group">
                 <input type="file" class="form-control" id="uploadfile" name="uploadfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
@@ -47,28 +45,26 @@
 
     <div class="container " style=" padding-bottom: 5%;">
         <div style="margin-bottom: 1rem;">
-            <table id="tablaMarca" class="table table-striped dt-responsive nowrap" style="width:100%">
+            <table id="tablaRoles" class="table table-striped dt-responsive nowrap" style="width:100%">
 
                 <thead class="thead-dark">
                     <tr>
                         <th class="text-center">ID</th>
-                        <th class="text-center">Marca</th>
-                        <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
-                        <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
+                        <th class="text-center">Destino</th>
+                        <th class="text-center">Mensajero</th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <th:block th:each="marca: ${listMarcas}">
+                    <th:block th:each="ruta: ${listRutas}">
                         <tr>
-                            <td class="text-center">[[${marca.id}]]</td>
-                            <td class="text-center">[[${marca.name}]]</td>
+                            <td class="text-center">[[${ruta.id}]]</td>
+                            <td class="text-center"><a th:href="${ruta.destino}" target="_blank">Link</a></td>
+                            <td class="text-center">[[${ruta.usuario.id}]]</td>
 
-                            <td class="text-center" sec:authorize="hasAuthority('Admin')">
-                                <a class="btn btn-primary" th:href="@{'/views/marcas/edit/'+ ${marca.id}}">Edit</a>
-                            </td>
-                            <td class="text-center" sec:authorize="hasAuthority('Admin')">
-                                <a class="btn btn-primary" th:href="@{'/views/marcas/delete/'+ ${marca.id}}">Delete</a>
-                            </td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/ruta/edit/'+ ${ruta.id}}">Editar</a></td>
+                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/ruta/delete/'+ ${ruta.id}}">Borrar</a></td>
                         </tr>
                     </th:block>
                 </tbody>
@@ -81,7 +77,7 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#tablaMarca').DataTable({
+            var table = $('#tablaRoles').DataTable({
                 colReorder: true,
                 deferRender: true,
                 lengthChange: false,
@@ -92,16 +88,17 @@
                             exportOptions: {
                                 columns: [0, 1]
                             },
-                            sheetName: 'marcas',
+                            sheetName: 'roles',
                             title: null,
                             className: 'btn-primary',
 
                             split: [, {
                                 extend: 'print',
+                                text: 'Imprimir',
                                 exportOptions: {
                                     columns: [0, 1]
                                 },
-                                title: 'Marca',
+                                title: 'Roles',
                             }],
                             className: 'btn-primary',
 
@@ -153,7 +150,7 @@
             });
 
             table.buttons().container()
-                .appendTo('#tablaMarca_wrapper .col-md-6:eq(0)');
+                .appendTo('#tablaRoles_wrapper .col-md-6:eq(0)');
         });
     </script>
 
