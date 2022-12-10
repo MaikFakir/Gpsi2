@@ -33,19 +33,19 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-center">Destino</th>
-                        <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
-                        <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
+                        <th class="text-center"></th>
+                        <th class="text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <th:block th:each="enviom: ${envio}">
                         <tr>
-                            <td class="text-center">[[${gestionenvios.id}]]</td>
-                            <td class="text-center">[[${gestionenvios.usuario.id}]]</td>
+                            <td class="text-center">[[${enviom.id}]]</td>
+                            <td class="text-center"><a th:href="${enviom.destino}" target="_blank">Link</a></td>
 
-                            <td class="text-center" sec:authorize="hasAuthority('Admin')">
-                                <a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a>
-                                <a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a>
+                            <td class="text-center">
+                                <a class="btn btn-primary" th:href="@{'/views/ruta/edit/'+ ${enviom.id}}">Edit</a>
+                                <a class="btn btn-primary" th:href="@{'/views/ruta/delete/'+ ${enviom.id}}">Delete</a>
                             </td>
                         </tr>
                     </th:block>

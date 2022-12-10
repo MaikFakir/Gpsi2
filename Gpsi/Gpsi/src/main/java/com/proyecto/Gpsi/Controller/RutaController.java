@@ -48,9 +48,9 @@ public class RutaController {
             model.addAttribute("envio", rutaenvio);
             model.addAttribute("title", "Mi Entregas.");
             model.addAttribute("message","Se ha cargado correctamente su rutas.");
-            return "/views/dashboard/misRutas";https://github.com/MaikFakir/Gpsi2
+            return "/views/dashboard/misRutas";
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error2", e.getMessage());
             return "error";
         }
     }

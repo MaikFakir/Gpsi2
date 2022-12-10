@@ -45,10 +45,10 @@ public class RutaService {
 
     }
 
-    public List<Ruta> findByRutasMensajero(Integer id) throws Exception {
+    public List<Ruta> findByRutasMensajero(int i) throws Exception {
 
         try {
-            List<Ruta> entities = this.repo2.findByRutasMensajero(id);
+            List<Ruta> entities = this.repo2.findByRutasMensajero(i);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
