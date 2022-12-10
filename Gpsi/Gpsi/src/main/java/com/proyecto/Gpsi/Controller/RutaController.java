@@ -41,7 +41,7 @@ public class RutaController {
 	@GetMapping(value = "/Mis_envios")
     public String bucarporid(@AuthenticationPrincipal CustomUserDetails loggedUser,Model model,Integer id){
         try {
-			hola
+			
 			id =loggedUser.getIdentificacion();
 
             List<Ruta> rutaenvio = this.service.findByRutasMensajero(id);
