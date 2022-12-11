@@ -78,9 +78,8 @@
                                                 <th class="text-center">Fecha Recibido</th>
                                                 <th class="text-center"></th>
                                                 <th class="text-center"></th>
-                                            </tr>
                                         </thead>
-                                        <tbody sec:authorize="hasAuthority('Usuario')">
+                                        <tbody sec:authorize="hasAnyAuthority('Usuario','Empresa')">
                                             <th:block th:each="gestionenvios: ${listGestionEnvios}">
                                                 <tr>
                                                     <td class="text-center">[[${gestionenvios.id}]]</td>
@@ -108,7 +107,7 @@
                                                 </tr>
                                             </th:block>
                                         </tbody>
-                                        <tbody sec:authorize="hasAnyAuthority('Admin','Enrutador')">
+                                        <tbody sec:authorize="hasAnyAuthority('Admin','Enrutador','Seguimiento')">
                                             <th:block th:each="gestionenvios: ${listGestionEnvios22}">
                                                 <tr>
                                                     <td class="text-center">[[${gestionenvios.id}]]</td>
@@ -210,16 +209,16 @@
                         <div class="card-header">Tablas</div>
                         <div class="card-body">
                             <ul class="list-group">
-                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Usuario', 'Admin','Usuario')"><a th:href="@{/views/gestion_envios/Mis_Pedidos}">Mis pedidos</a></li>
-                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Usuario', 'Admin','Usuario')"><a th:href="@{/views/ruta/Mis_envios}">Mis Entregas</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Usuario','Empresa')"><a th:href="@{/views/gestion_envios/Mis_Pedidos}">Mis pedidos</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Usuario','Mensajero')"><a th:href="@{/views/ruta/Mis_envios}">Mis Entregas</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/usuarios/listar}">Usuarios</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/roles/listar}">Roles</a></li>
                                 <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/tpProd/listar}">Tipos Productos</a></li>
-                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador','Seguimiento')"><a th:href="@{/views/gestion_envios/listar}">Gestion envios</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/bitacora_operaciones/listar}">Bitacora</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
-                                <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/enrutador/listar}">Ruta</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Seguimiento')"><a th:href="@{/views/seguimiento/listar}">Seguimiento</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/enrutador/listar}">Enrutar</a></li>
                         </div>
                     </div>
                 </div>

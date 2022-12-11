@@ -79,7 +79,7 @@
 
         </div>
         <div class="container text-center">
-            <a th:href="@{/views/gestion_envios/nueva}" sec:authorize="hasAuthority('Usuario')"><button type="button" class="btn btn-warning" >Nuevo Pedido </button></a>
+            <a th:href="@{/views/gestion_envios/nueva}" sec:authorize="hasAnyAuthority('Usuario','Empresa')"><button type="button" class="btn btn-warning" >Nuevo Pedido </button></a>
         </div>
 
     </div>

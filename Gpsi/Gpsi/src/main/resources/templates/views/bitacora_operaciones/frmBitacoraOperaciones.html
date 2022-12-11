@@ -30,21 +30,21 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Numero de Guia</label>
-                        <input type="text" class="form-control" th:field="*{numGuia}">
+                        <input type="text" class="form-control" th:field="*{numGuia}" required min="1" maxlength="12">
 
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Orden:</label>
-                        <input type="text" class="form-control" th:field="*{Orden}">
+                        <input type="text" class="form-control" th:field="*{Orden}" required min="1">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Valor Seguro:</label>
-                        <input type="number" class="form-control" th:field="*{valorSeguroProducto}">
+                        <input type="number" class="form-control" th:field="*{valorSeguroProducto}" required min="10000" maxlength="12">
 
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Estado:</label>
-                        <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado"> 
+                        <select th:field="*{estado}" class="form-control form-control-sm col-md-6" id="estado" required> 
                             <option value="1">Transito</option>
                             <option value="2">Cancelado</option>
                             <option value="3">Novedad</option>				
@@ -53,7 +53,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Distancia:</label>
-                        <input type="number" class="form-control" th:field="*{distancia}">
+                        <input type="number" class="form-control" th:field="*{distancia}" required>
 
                     </div>
 

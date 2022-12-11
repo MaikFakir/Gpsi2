@@ -28,7 +28,7 @@
         <br>
     </div>
 
-    <div class="container " style=" padding-bottom: 5%;">
+    <div class="container " style=" padding-bottom: 5%;" sec:authorize="hasAnyAuthority('Admin')">
         <div>
             <a th:href="@{/views/seguimiento/nueva}"><button type="button" class="btn btn-warning">Nuevo Seguimiento</button></a>
         </div>
@@ -56,8 +56,8 @@
                         <th class="text-center ">GESTION ENVIO</th>
                         <th class="text-center ">RUTA</th>
                         <th class="text-center ">NOVEDADES</th>
-                        <th class="text-center "></th>
-                        <th class="text-center "></th>
+                        <th class="text-center " sec:authorize="hasAnyAuthority('Admin')"></th>
+                        <th class="text-center " sec:authorize="hasAnyAuthority('Admin')"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,8 +74,8 @@
                             <td class="text-center ">[[${segui.enrutador.id}]]</td>
                             <td class="text-center ">[[${segui.novedades}]]</td>
 
-                            <td class="text-center "><a class="btn btn-primary " th:href="@{'/views/seguimiento/edit/'+ ${segui.id}}">Editar</a></td>
-                            <td class="text-center "><a class="btn btn-primary " th:href="@{'/views/seguimiento/delete/'+ ${segui.id}}">Borrar</a></td>
+                            <td class="text-center " sec:authorize="hasAnyAuthority('Admin')"><a class="btn btn-primary " th:href="@{'/views/seguimiento/edit/'+ ${segui.id}}">Editar</a></td>
+                            <td class="text-center " sec:authorize="hasAnyAuthority('Admin')"><a class="btn btn-primary " th:href="@{'/views/seguimiento/delete/'+ ${segui.id}}">Borrar</a></td>
                         </tr>
                     </th:block>
                 </tbody>

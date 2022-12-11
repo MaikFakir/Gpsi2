@@ -33,8 +33,7 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-center">Destino</th>
-                        <th class="text-center"></th>
-                        <th class="text-center"></th>
+                        <th class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +42,7 @@
                             <td class="text-center">[[${enviom.id}]]</td>
                             <td class="text-center"><a th:href="${enviom.destino}" target="_blank">Link</a></td>
 
-                            <td class="text-center">
+                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')">
                                 <a class="btn btn-primary" th:href="@{'/views/ruta/edit/'+ ${enviom.id}}">Edit</a>
                                 <a class="btn btn-primary" th:href="@{'/views/ruta/delete/'+ ${enviom.id}}">Delete</a>
                             </td>
@@ -52,9 +51,6 @@
                 </tbody>
             </table>
 
-        </div>
-        <div class="container text-center">
-            <a th:href="@{/views/gestion_envios/nueva}" sec:authorize="hasAuthority('Usuario')"><button type="button" class="btn btn-warning" >Nuevo Pedido </button></a>
         </div>
 
     </div>
@@ -72,9 +68,9 @@
 
                             extend: 'excel',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                                columns: [0, 1]
                             },
-                            sheetName: 'gestionEnvios',
+                            sheetName: 'ruta',
                             title: null,
                             className: 'btn-primary',
 
@@ -82,7 +78,7 @@
                                 extend: 'print',
                                 text: 'Imprimir',
                                 exportOptions: {
-                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                                    columns: [0, 1]
                                 },
                                 title: 'Envio',
                             }],

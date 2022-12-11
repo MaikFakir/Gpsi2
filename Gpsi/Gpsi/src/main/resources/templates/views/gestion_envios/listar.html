@@ -58,7 +58,7 @@
                         <th class="text-center">Tamaño Paquete</th>
                         <th class="text-center">Fecha Creacion</th>
                         <th class="text-center">Fecha Recibido</th>
-                        <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
+                        <th class="text-center" sec:authorize="hasAnyAuthority('Admin','Mensajero')"></th>
                         <th class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"></th>
                         <th class="text-center" sec:authorize="hasAuthority('Admin')"></th>
                     </tr>
@@ -83,7 +83,7 @@
                             <td class="text-center">[[${gestionenvios.fechacreacion}]]</td>
                             <td class="text-center">[[${gestionenvios.fechaRecibido}]]</td>
 
-                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
+                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin','Mensajero')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/entregar/'+ ${gestionenvios.id}}">Entregar</a></td>
                             <td class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/edit2/'+ ${gestionenvios.id}}">Edit</a></td>
                             <td class="text-center" sec:authorize="hasAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/gestion_envios/delete/'+ ${gestionenvios.id}}">Delete</a></td>
 

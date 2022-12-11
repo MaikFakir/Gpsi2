@@ -38,13 +38,16 @@ public class RutaController {
 		return "/views/ruta/listar";
 	}
 
+
 	@GetMapping(value = "/Mis_envios")
-    public String bucarporid(@AuthenticationPrincipal CustomUserDetails loggedUser,Model model,Integer id){
+    public String bucarporid(@AuthenticationPrincipal CustomUserDetails loggedUser,Model model,String cd){
         try {
 			
-			id =loggedUser.getIdentificacion();
+			 int id =loggedUser.getIdentificacion();
 
-            List<Ruta> rutaenvio = this.service.findByRutasMensajero(id);
+			 cd = Integer.toString(id);
+
+            List<Ruta> rutaenvio = this.service.findByRutasMensajero(cd);
             model.addAttribute("envio", rutaenvio);
             model.addAttribute("title", "Mi Entregas.");
             model.addAttribute("message","Se ha cargado correctamente su rutas.");
@@ -66,7 +69,7 @@ public class RutaController {
 	}
 
 	@PostMapping("/save")
-	public String guardarMarca(Ruta ruta, RedirectAttributes ra) {
+	public String guardarRuta(Ruta ruta, RedirectAttributes ra) {
 		service.save(ruta);
 		ra.addFlashAttribute("message","La marca ha sido guardado correctamente!");
 		return "redirect:/views/ruta/listar";
@@ -87,14 +90,14 @@ public class RutaController {
 		}
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteMarca(@PathVariable("id")Integer id,RedirectAttributes ra){
+	    @GetMapping("/delete/{id}")
+	public String deleteRol(@PathVariable("id")Integer id,RedirectAttributes ra){
 		try{
 			service.delete(id);
 		} catch (RutaNotFoundException e){
-			ra.addFlashAttribute("message","La marca que busca no se encuentra!");
+			ra.addFlashAttribute("message","El Ma que busca no se encuentra!");
 		} catch (Exception e){
-			ra.addFlashAttribute("error","No puede eliminar una Ruta que ya fue asignada a otras tablas!");
+			ra.addFlashAttribute("error","No puede eliminar una Rol que ya fue asignado a otras tablas!");
 		}
 		return "redirect:/views/ruta/listar";
 	}

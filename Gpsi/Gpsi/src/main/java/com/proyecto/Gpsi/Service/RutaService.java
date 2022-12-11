@@ -15,40 +15,40 @@ import com.proyecto.Gpsi.Util.RutaNotFoundException;
 public class RutaService {
     
     @Autowired
-    private RutaRepository2 repo;
+    private RutaRepository2 repo2;
 
     @Autowired
-    private RutaRepository repo2;
+    private RutaRepository repo;
     
 
     public List<Ruta> listRutas() {
-        return (List<Ruta>) repo.findAll();
+        return (List<Ruta>) repo2.findAll();
     }
 
     public void save(Ruta ruta) {
-        repo.save(ruta);
+        repo2.save(ruta);
     }
 
     public Ruta get(Integer id) throws RutaNotFoundException{
-		Optional<Ruta> result = repo.findById(id);
+		Optional<Ruta> result = repo2.findById(id);
         if(result.isPresent()){
             return result.get();
         }
         throw new RutaNotFoundException("No se pudo encontrar una ruta con ID" + id);
 	}
-    
-    public void delete(Integer id) throws RutaNotFoundException {
-        Long count = repo.countById(id);
-        if (count == null || count == 0) {
-            throw new RutaNotFoundException("No se pudo encontrar alguna ruta con el ID " + id);
-        }
 
+    public void delete(Integer id) throws RutaNotFoundException {
+        Long count = repo2.countById(id);
+        if (count == null || count == 0) {
+            throw new RutaNotFoundException("No se pudo encontrar algun usuario con el ID " + id);
+        }
+        repo.deleteById(id);
     }
 
-    public List<Ruta> findByRutasMensajero(int i) throws Exception {
+    public List<Ruta> findByRutasMensajero(String cd) throws Exception {
 
         try {
-            List<Ruta> entities = this.repo2.findByRutasMensajero(i);
+            List<Ruta> entities = this.repo.findByRutasMensajero(cd);
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

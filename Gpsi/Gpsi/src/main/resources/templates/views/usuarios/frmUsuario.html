@@ -27,28 +27,29 @@
             <div class="border rounded" style="padding: 3%;">
 
                 <div class="form-floating mb-3 ">
-                    <input type="number" class="form-control" th:field="*{id}" id="id" name="id" required maxlength="45">
-                    <label for="id" class="form-label">Id:</label>
+                    <input type="number " class="form-control " th:field="*{id}" name="id" placeholder="1231001212 " required min="1" max="99999999999" maxlength="11">
+                    <label for="id ">Numero de Documento</label>
                 </div>
 
                 <div class="form-floating mb-3 ">
-                    <select class="form-select" th:field="*{tipoDocumento}">
-                        <option th:value="0" >Tipo Documento</option>
+                    <select class="form-select" th:field="*{tipoDocumento}" required>
+                        <div></div>
                         <option th:value="1" th:text="Cedula">Cedula</option>
                         <option th:value="2" th:text="Pasaporte">Pasaporte</option>
-                      </select>
+                    </select>
+                    <label for="id" class="form-label">Tipo documento:</label>
                 </div>
 
                 <div class="form-floating mb-3 ">
-                    <input type="text" class="form-control " th:field="*{nombres}" placeholder="nombre " required>
+                    <input type="text" class="form-control " th:field="*{nombres}" placeholder="Nombres" required>
                     <label for="nombres">Nombre</label>
                 </div>
                 <div class="form-floating mb-3 ">
-                    <input type="text" class="form-control " th:field="*{apellidos}" name="apellidos" placeholder="nombre" required>
+                    <input type="text" class="form-control " th:field="*{apellidos}" name="apellidos" placeholder="Apellidos" required>
                     <label for="apellidos">Apellido</label>
                 </div>
                 <div class="form-floating mb-3 ">
-                    <input type="number" class="form-control " th:field="*{telefono}" name="telefono" placeholder="3123123123 " required>
+                    <input type="number " class="form-control " th:field="*{telefono}" name="telefono" placeholder="3123123123 " required min="1" maxlength="12">
                     <label for="telefono">Telefono</label>
                 </div>
                 <div class="form-floating mb-3 ">

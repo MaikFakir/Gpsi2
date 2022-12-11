@@ -48,11 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/views/dashboard/**","/views/bitacora_operaciones/**","/views/enrutador/**","/views/gestion_envios/**","/marcas/**","/views/roles/**","/views/seguimiento/**","/views/tpProd/**","/views/usuarios/**","/views/gestion_envios/**","/logout").authenticated()
-			.antMatchers("/views/roles/**").hasAuthority("Admin")
-			.antMatchers("/views/gestion_envios/Mis_Pedidos","/views/gestion_envios/nueva").hasAnyAuthority("Usuario")
-			.antMatchers("/views/marcas/**","/views/gestion_envios/listar","/views/gestion_envios/nueva","/views/ruta/listar","/views/ruta/frmRuta").hasAnyAuthority("Admin","Enrutador")
-			.anyRequest().permitAll()
+			.antMatchers("/views/dashboard/**","/logout").authenticated()
 			.and()
 			.formLogin()
     		.failureUrl("/login_error")
@@ -66,6 +62,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().deleteCookies("JSESSIONID").logoutSuccessUrl("/login?logout").permitAll();
             
 	}
+
+	//antMatchers("/views/gestion_envios/**","/views/seguimiento/**").hasAuthority("Seguimiento")
+	//		.antMatchers("/views/gestion_envios/**").hasAuthority("Empresa")
+//.antMatchers("/views/gestion_envios/listar","/views/enrutador/**","/views/bitacora_operaciones/**","/views/marcas/**","/views/roles/**","/views/ruta/**").hasAuthority("Admin")
 	
 	
 }

@@ -56,8 +56,8 @@
                         <th class="text-center">INSTRUCCIONES</th>
                         <th class="text-center">PESO</th>
                         <th class="text-center">GESTION ENVIOS</th>
-                        <th class="text-center"></th>
-                        <th class="text-center"></th>
+                        <th class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"></th>
+                        <th class="text-center" sec:authorize="hasAnyAuthority('Admin')"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,8 +71,8 @@
                             <td class="text-center">[[${ruta.peso}]]</td>
                             <td class="text-center">[[${ruta.gestionenvios.id}]]</td>
 
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/enrutador/edit/'+ ${ruta.id}}">Editar</a></td>
-                            <td class="text-center"><a class="btn btn-primary" th:href="@{'/views/enrutador/delete/'+ ${ruta.id}}">Eliminar</a></td>
+                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a class="btn btn-primary" th:href="@{'/views/enrutador/edit/'+ ${ruta.id}}">Editar</a></td>
+                            <td class="text-center" sec:authorize="hasAnyAuthority('Admin')"><a class="btn btn-primary" th:href="@{'/views/enrutador/delete/'+ ${ruta.id}}">Eliminar</a></td>
                         </tr>
                     </th:block>
                 </tbody>

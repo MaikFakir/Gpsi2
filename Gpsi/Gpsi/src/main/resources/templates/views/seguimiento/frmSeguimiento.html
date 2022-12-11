@@ -46,13 +46,13 @@
 
                     <div class="col-md-6 mb-3">
                         <label for="lastName" class="form-label">Ruta</label>
-                        <input type="text" class="form-control" th:field="*{enrutador}">
+                        <input type="number" class="form-control" th:field="*{enrutador}">
 
                     </div>
 
                     <div class="col-md-12 mb-3">
                         <label for="lastName" class="form-label">Novedades</label>
-                        <textarea class="form-control" th:field="*{novedades}" minlength="4" maxlength="500" pattern="{4,8}"></textarea>
+                        <textarea class="form-control" th:field="*{novedades}" minlength="4" maxlength="500"></textarea>
 
                     </div>
 
