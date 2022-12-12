@@ -83,13 +83,13 @@ public class UsuarioServices {
 			throws MessagingException, UnsupportedEncodingException {
 		String toAddress = usuario.getEmail();
 		String fromAddress = "senapruebas18@gmail.com";
-		String senderName = "your company name";
-		String subject = "Please verify your registration";
-		String content = "Dear [[name]],<br>"
-				        + "Please click the link below to verify your registration:<br>"
-				        + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
-				        + "Thank you,<br>"
-				        + "Your company name.";
+		String senderName = "Grip Logistica";
+		String subject = "Porfavor verifique su Correo";
+		String content = "Bienvenido [[name]],<br>"
+				        + "De click en el  link de acontinuación para verificar su registro:<br>"
+				        + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFICAR</a></h3>"
+				        + "Gracias,<br>"
+				        + "Grip Logistica.";
 		
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
