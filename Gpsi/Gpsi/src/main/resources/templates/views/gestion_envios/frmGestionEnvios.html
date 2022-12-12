@@ -55,7 +55,7 @@
                         <label for="lastName" class="form-label">Direccion destino:</label>
                         <input type="text" class="form-control" th:field="*{destino}" id="destino" name="destino" required>
                     </div>
-                    <div class="col-md-6 mb-3" sec:authorize="hasAnyAuthority('Admin','Empresa')">
+                    <div class="col-md-6 mb-3" sec:authorize="hasAnyAuthority('Admin','Empresa','Enrutador')">
                         <label for="lastName" class="form-label">Cantidad:</label>
                         <input type="number" class="form-control" th:value="1" th:id="cantidad" th:name="cantidad">
 

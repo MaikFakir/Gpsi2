@@ -210,7 +210,7 @@
                         <div class="card-body">
                             <ul class="list-group">
                                 <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Usuario','Empresa')"><a th:href="@{/views/gestion_envios/Mis_Pedidos}">Mis pedidos</a></li>
-                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Usuario','Mensajero')"><a th:href="@{/views/ruta/Mis_envios}">Mis Entregas</a></li>
+                                <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Mensajero')"><a th:href="@{/views/ruta/Mis_envios}">Mis Entregas</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/usuarios/listar}">Usuarios</a></li>
                                 <li class="list-group-item" sec:authorize="hasAuthority('Admin')"><a th:href="@{/views/roles/listar}">Roles</a></li>
                                 <li class="list-group-item" sec:authorize="hasAnyAuthority('Admin','Enrutador')"><a th:href="@{/views/marcas/listar}">Marcas</a></li>

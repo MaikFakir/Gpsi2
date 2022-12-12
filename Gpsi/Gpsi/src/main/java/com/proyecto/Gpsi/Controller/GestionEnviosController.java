@@ -129,7 +129,7 @@ public class GestionEnviosController {
 		gestionEnvios.setFechaRecibido("0000-00-00 00:00");
 		service.save(gestionEnvios);
 		ra.addFlashAttribute("message", "La gestion ha sido guardada correctamente!");
-		return "redirect:/views/dashboard/Mis_Pedidos";
+		return "redirect:/views/gestion_envios/Mis_Pedidos";
 	}
 
 	@GetMapping("/entregar/{id}")
